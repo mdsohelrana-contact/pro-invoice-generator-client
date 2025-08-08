@@ -2,13 +2,14 @@
 
 import React from "react";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 
 interface SectionHeaderProps {
   title?: string;
   subTitle?: string;
-  className?: string;          // for container div
-  titleClassName?: string;     // for h2
-  subTitleClassName?: string;  // for p
+  className?: string;          
+  titleClassName?: string;    
+  subTitleClassName?: string;  
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({
@@ -19,7 +20,12 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   subTitleClassName,
 }) => {
   return (
-    <div className={clsx("text-center mb-16", className)}>
+    <motion.div
+      className={clsx("text-center mb-16", className)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       {title && (
         <h2
           className={clsx(
@@ -35,7 +41,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           {subTitle}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
 

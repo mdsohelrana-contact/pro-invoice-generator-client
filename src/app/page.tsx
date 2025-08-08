@@ -1,15 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   FileText,
@@ -19,9 +9,7 @@ import {
   Globe,
   Shield,
   Zap,
-  Star,
   ArrowRight,
-  Play,
 } from "lucide-react";
 import HeroSection from "@/components/Module/Home/HeroSection";
 import FeaturesSection from "@/components/Module/Home/FeaturesSection";
@@ -29,7 +17,6 @@ import TestimonialSection from "@/components/Module/Home/TestmonialSection";
 import IntegrationSection from "@/components/Module/Home/IntegrationSection";
 import StatsSection from "@/components/Module/Home/StatsSection";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
-import Footer from "@/components/Module/Shared/Footer/Footer";
 import { useLanguage } from "../components/context/LanguageContext";
 
 export default function HomePage() {
@@ -304,6 +291,7 @@ export default function HomePage() {
         title={t.cta.title}
         subTitle={t.cta.subtitle}
         buttonValue={t.cta.button}
+        icon={<ArrowRight className=" w-5 h-5" />}
       />
     </div>
   );
