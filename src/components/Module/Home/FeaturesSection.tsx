@@ -7,19 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import SectionHeader from "../Shared/Components/SectionHeader";
 
 const FeaturesSection = ({ t }: { t: any }) => {
   return (
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.features.title}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t.features.subtitle}
-          </p>
-        </div>
+        <SectionHeader
+          title={t.features.title}
+          subTitle={t.features.subtitle}
+          subTitleClassName="text-xl text-gray-600 max-w-2xl mx-auto"
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {t.features.items.map((feature: any, index: any) => (

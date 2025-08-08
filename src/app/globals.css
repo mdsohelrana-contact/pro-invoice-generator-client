@@ -15,6 +15,19 @@ body {
 }
 
 
+.gradient-text {
+  @apply bg-gradient-to-r from-[#007bff] to-[#28a745] bg-clip-text text-xl font-bold text-transparent;
+}
+
+
+.primary-color {
+  @apply text-[#007bff];
+}
+.primary-color:hover {
+  @apply text-[#0056b3]; /* A darker blue for hover */
+}
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

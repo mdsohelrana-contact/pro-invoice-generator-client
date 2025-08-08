@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
+import PrimaryButton from "../Shared/Buttons/PrimaryButton";
 
 const HeroSection = ({ t }: { t: any }) => {
   return (
@@ -19,13 +20,10 @@ const HeroSection = ({ t }: { t: any }) => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/dashboard">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-lg px-8 py-3"
-            >
+            {/* Primary Button */}
+            <PrimaryButton size="lg" icon={<ArrowRight />}>
               {t.hero.cta}
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+            </PrimaryButton>
           </Link>
           <Button size="lg" variant="outline" className="text-lg px-8 py-3">
             <Play className="mr-2 w-5 h-5" />

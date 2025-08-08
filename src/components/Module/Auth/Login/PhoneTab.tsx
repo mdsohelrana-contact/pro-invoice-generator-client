@@ -10,7 +10,7 @@ import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormFieldInput from "../../Form/FormFieldInput";
-import FormButton from "../../Form/FormButton";
+import PrimaryButton from "../../Shared/Buttons/PrimaryButton";
 
 // Validation schema
 const formSchema = z.object({
@@ -84,15 +84,16 @@ const PhoneTab = ({ currentContent, fadeInUp }: any) => {
           </div>
         </motion.div>
 
-           {/* Submit Button */}
-
+        {/* Submit Button */}
         <motion.div
           variants={fadeInUp}
           initial="initial"
           animate="animate"
           transition={{ delay: 0.2 }}
         >
-          <FormButton type="submit">{currentContent.signIn}</FormButton>
+          <PrimaryButton className="w-full" type="submit">
+            {currentContent.signIn}
+          </PrimaryButton>
         </motion.div>
       </form>
     </Form>

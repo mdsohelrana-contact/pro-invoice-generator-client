@@ -28,7 +28,7 @@ import FeaturesSection from "@/components/Module/Home/FeaturesSection";
 import TestimonialSection from "@/components/Module/Home/TestmonialSection";
 import IntegrationSection from "@/components/Module/Home/IntegrationSection";
 import StatsSection from "@/components/Module/Home/StatsSection";
-import CTASection from "@/components/Module/Home/CTASection";
+import CTASection from "@/components/Module/Shared/Components/CTASection";
 import Footer from "@/components/Module/Shared/Footer/Footer";
 import { useLanguage } from "../components/context/LanguageContext";
 
@@ -300,7 +300,11 @@ export default function HomePage() {
       <StatsSection t={t} />
 
       {/* CTA Section */}
-      <CTASection t={t} />
+      <CTASection
+        title={t.cta.title}
+        subTitle={t.cta.subtitle}
+        buttonValue={t.cta.button}
+      />
     </div>
   );
 }

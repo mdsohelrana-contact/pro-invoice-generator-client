@@ -11,6 +11,7 @@ import LanguageButton from "@/components/Module/Shared/Buttons/LanguageButton";
 import PriceCard from "@/components/Module/Pricing/PriceCard";
 import PricingFeatures from "./PricingFeatures";
 import PricingFaq from "./PricingFaq";
+import CTASection from "@/components/Module/Shared/Components/CTASection";
 const PricingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
   const { language } = useLanguage();
@@ -294,20 +295,11 @@ const PricingPage = () => {
         <PricingFaq t={t.faq} />
 
         {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Join thousands of businesses using InvoicePro BD
-          </p>
-          <Link href="/dashboard">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
-            >
-              Start Your Free Trial
-            </Button>
-          </Link>
-        </div>
+        <CTASection
+          title="Ready to Get Started?"
+          subTitle=" Join thousands of businesses using InvoicePro BD"
+          buttonValue="Start Your Free Trial"
+        />
       </div>
     </div>
   );

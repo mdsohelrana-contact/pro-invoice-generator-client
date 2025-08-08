@@ -2,17 +2,17 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import SectionHeader from "../Shared/Components/SectionHeader";
 
 const TestimonialSection = ({ t }: { t: any }) => {
   return (
     <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-green-50">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.testimonials.title}
-          </h2>
-          <p className="text-xl text-gray-600">{t.testimonials.subtitle}</p>
-        </div>
+
+        <SectionHeader
+          title={t.testimonials.title}
+          subTitle={t.testimonials.subtitle}
+        />
 
         <div className="grid md:grid-cols-3 gap-8">
           {t.testimonials.items.map((testimonial: any, index: any) => (

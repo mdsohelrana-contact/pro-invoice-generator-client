@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useState } from "react";
 import { FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,6 +14,7 @@ import { useLanguage } from "@/components/context/LanguageContext";
 import LanguageButton from "../../Shared/Buttons/LanguageButton";
 import EmailTab from "./EmailTab";
 import PhoneTab from "./PhoneTab";
+import PrimaryButton from "../../Shared/Buttons/PrimaryButton";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -218,7 +219,7 @@ const LoginForm = () => {
                 >
                   <Link
                     href="/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-800"
+                    className="text-sm primary-color hover:primary-hover"
                   >
                     {currentContent.forgotPassword}
                   </Link>
@@ -238,20 +239,9 @@ const LoginForm = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <Button
-                      variant="outline"
-                      className="flex items-center justify-center space-x-2"
-                    >
-                      <div className="w-5 h-5 bg-blue-600 rounded"></div>
-                      <span>Facebook</span>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="flex items-center justify-center space-x-2"
-                    >
-                      <div className="w-5 h-5 bg-red-500 rounded"></div>
-                      <span>Google</span>
-                    </Button>
+                    <PrimaryButton>Facebook</PrimaryButton>
+
+                    <PrimaryButton>Facebook</PrimaryButton>
                   </div>
                 </motion.div>
 
@@ -265,8 +255,8 @@ const LoginForm = () => {
                   <p className="text-sm text-gray-600">
                     {currentContent.noAccount}{" "}
                     <Link
-                      href="/register"
-                      className="text-blue-600 hover:text-blue-800 font-medium"
+                      href="/forgot-password"
+                      className="text-sm primary-color hover:primary-hover"
                     >
                       {currentContent.signUp}
                     </Link>

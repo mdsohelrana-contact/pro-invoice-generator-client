@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import SectionHeader from "../Shared/Components/SectionHeader";
+
 const StatsSection = ({ t }: { t: any }) => {
   return (
     <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-green-600 text-white">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.stats.title}
-          </h2>
-          <p className="text-xl opacity-90">{t.stats.subtitle}</p>
-        </div>
+        
+        {/* Section Header */}
+        <SectionHeader
+          title={t.stats.title}
+          subTitle={t.stats.subtitle}
+          subTitleClassName="text-xl opacity-90 text-white"
+        />
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {t.stats.items.map((stat: any, index: any) => (

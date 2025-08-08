@@ -58,8 +58,8 @@ export default function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         {/* Left Section: Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <ReceiptText className="h-6 w-6 text-[#007bff]" />
-          <span className="bg-gradient-to-r from-[#007bff] to-[#28a745] bg-clip-text text-xl font-bold text-transparent">
+          <ReceiptText className="h-6 w-6 primary-color" />
+          <span className="gradient-text">
             InvoicePro BD
           </span>
         </Link>

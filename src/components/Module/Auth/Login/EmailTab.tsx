@@ -11,6 +11,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import FormFieldInput from "../../Form/FormFieldInput";
 import FormButton from "../../Form/FormButton";
+import PrimaryButton from "../../Shared/Buttons/PrimaryButton";
 
 // Validation schema
 const formSchema = z.object({
@@ -80,7 +81,9 @@ const EmailTab = ({ currentContent, fadeInUp }: any) => {
           animate="animate"
           transition={{ delay: 0.2 }}
         >
-          <FormButton type="submit">{currentContent.signIn}</FormButton>
+          <PrimaryButton className="w-full" type="submit">
+            {currentContent.signIn}
+          </PrimaryButton>
         </motion.div>
       </form>
     </Form>
