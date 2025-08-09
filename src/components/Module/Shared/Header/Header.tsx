@@ -105,9 +105,13 @@ export default function Header() {
             aria-label="Switch language"
           />
           {/* Login Button */}
-          <Button variant="ghost" size="sm" aria-label="Login">
-            <Link href="/login">Login</Link>
-          </Button>
+          <Link
+            href="/login"
+            className="hidden md:flex btn btn-ghost btn-sm"
+            aria-label="Login"
+          >
+            Login
+          </Link>
 
           {/* Get Started Button */}
           <Button
@@ -185,13 +189,13 @@ export default function Header() {
                     aria-label="Switch language"
                   />
 
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
+                  <Link
+                    href="/login"
+                    className="hidden md:flex btn btn-ghost btn-sm"
                     aria-label="Login"
                   >
                     Login
-                  </Button>
+                  </Link>
                   <PrimaryButton aria-label="Get Started with InvoicePro BD">
                     Get Started
                   </PrimaryButton>

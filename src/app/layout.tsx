@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Module/Shared/Header/Header";
 import Footer from "@/components/Module/Shared/Footer/Footer";
 import { LanguageProvider } from "../components/context/LanguageContext";
+import Script from "next/script";
 
 // Load English + Bangla fonts
 const inter = Inter({ subsets: ["latin"] });
@@ -86,6 +87,28 @@ export default function RootLayout({
           media="(prefers-color-scheme: dark)"
         />
 
+        {/* Google Site Verification */}
+        <meta
+          name="google-site-verification"
+          content="whaDDGr5U6lP8fWaCtWt_72pdvz7aPjOfUkYaOVUj5s"
+        />
+
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-D4JB98H4NF`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-D4JB98H4NF');
+          `}
+        </Script>
+
+        
+
         {/* Keywords */}
         <meta
           name="keywords"
@@ -142,6 +165,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <LanguageProvider>
           <Header />
+
+           <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=GTM-PR5C8BV2`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
           <main className="min-h-screen">{children}</main>
           <Footer />
           <Toaster />
