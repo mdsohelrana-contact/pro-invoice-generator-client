@@ -166,16 +166,18 @@ const LoginForm = () => {
             transition={{ duration: 0.8 }}
           >
             <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-2xl">
-              <CardHeader className="text-center pb-6">
+              <header className="text-center pb-6">
                 <div className="flex items-center justify-between mb-4">
                   <div></div>
-                  <LanguageButton />
+                  <LanguageButton aria-label="Change Language" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">
                   {currentContent.title}
-                </CardTitle>
+                </h1>
+
                 <p className="text-gray-600">{currentContent.subtitle}</p>
-              </CardHeader>
+              </header>
               <CardContent>
                 <Tabs
                   value={loginMethod}
@@ -218,6 +220,7 @@ const LoginForm = () => {
                   transition={{ delay: 0.3 }}
                 >
                   <Link
+                  aria-label={currentContent.forgotPassword}
                     href="/forgot-password"
                     className="text-sm primary-color hover:primary-hover"
                   >
@@ -257,6 +260,7 @@ const LoginForm = () => {
                     <Link
                       href="/forgot-password"
                       className="text-sm primary-color hover:primary-hover"
+                      aria-label={currentContent.signUp}
                     >
                       {currentContent.signUp}
                     </Link>

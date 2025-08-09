@@ -21,16 +21,16 @@ export const metadata: Metadata = {
   description:
     "Create professional invoices for your Bangladeshi business with multi-language support, local payment methods (bKash, Nagad, Bank), and tax compliance. Fast, secure, and easy to use.",
   applicationName: "InvoicePro BD",
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://invoice-pro-wine.vercel.app"),
   openGraph: {
     title: "InvoicePro BD - Professional Invoice Generator for Bangladesh",
     description:
       "Create, manage, and send invoices with local payment methods in Bangladesh. Supports Bangla & English.",
-    url: "https://yourdomain.com",
+    url: "https://invoice-pro-wine.vercel.app",
     siteName: "InvoicePro BD",
     images: [
       {
-        url: "https://yourdomain.com/og-image.jpg",
+        url: "https://invoice-pro-wine.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "InvoicePro BD - Generate Invoices in Bangla & English",
@@ -44,17 +44,17 @@ export const metadata: Metadata = {
     title: "InvoicePro BD - Professional Invoice Generator for Bangladesh",
     description:
       "Create, manage, and send invoices with local payment methods in Bangladesh. Supports Bangla & English.",
-    images: ["https://yourdomain.com/og-image.jpg"],
+    images: ["https://invoice-pro-wine.vercel.app/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://yourdomain.com",
+    canonical: "https://invoice-pro-wine.vercel.app",
     languages: {
-      en: "https://yourdomain.com/en",
-      bn: "https://yourdomain.com/bn",
+      en: "https://invoice-pro-wine.vercel.app/en",
+      bn: "https://invoice-pro-wine.vercel.app/bn",
     },
   },
 };
@@ -100,8 +100,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "InvoicePro BD",
-              url: "https://yourdomain.com",
-              logo: "https://yourdomain.com/logo.png",
+              url: "https://invoice-pro-wine.vercel.app",
+              logo: "https://invoice-pro-wine.vercel.app/logo.png",
               sameAs: [
                 "https://facebook.com/yourpage",
                 "https://twitter.com/yourprofile",
@@ -110,7 +110,7 @@ export default function RootLayout({
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+8801XXXXXXXXX",
+                  telephone: "+8801619830567",
                   contactType: "customer service",
                   areaServed: "BD",
                   availableLanguage: ["en", "bn"],
@@ -127,10 +127,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              url: "https://yourdomain.com",
+              url: "https://invoice-pro-wine.vercel.app",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://yourdomain.com/search?q={search_term_string}",
+                target:
+                  "https://invoice-pro-wine.vercel.app/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),

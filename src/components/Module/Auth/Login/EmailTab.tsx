@@ -39,6 +39,8 @@ const EmailTab = ({ currentContent, fadeInUp }: any) => {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 px-4 sm:px-6 py-6 bg-white rounded-md shadow-sm"
+        aria-label={currentContent.title || "Login Form"}
+        noValidate
       >
         {/* Email Field */}
         <motion.div
@@ -53,6 +55,9 @@ const EmailTab = ({ currentContent, fadeInUp }: any) => {
             label={currentContent.email}
             placeholder="your@email.com"
             icon={<Mail className="h-4 w-4" />}
+            type="email"
+            maxLength={254}
+            required
           />
         </motion.div>
 
@@ -70,6 +75,8 @@ const EmailTab = ({ currentContent, fadeInUp }: any) => {
             placeholder="••••••••"
             type="password"
             icon={<Lock className="h-4 w-4" />}
+            maxLength={8}
+            required
           />
         </motion.div>
 
@@ -81,7 +88,11 @@ const EmailTab = ({ currentContent, fadeInUp }: any) => {
           animate="animate"
           transition={{ delay: 0.2 }}
         >
-          <PrimaryButton className="w-full" type="submit">
+          <PrimaryButton
+            className="w-full"
+            type="submit"
+            aria-label={currentContent.signIn}
+          >
             {currentContent.signIn}
           </PrimaryButton>
         </motion.div>

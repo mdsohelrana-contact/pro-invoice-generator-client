@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import {
   FileText,
   Users,
@@ -18,12 +17,23 @@ import IntegrationSection from "@/components/Module/Home/IntegrationSection";
 import StatsSection from "@/components/Module/Home/StatsSection";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
 import { useLanguage } from "../components/context/LanguageContext";
+import Head from "next/head";
 
 export default function HomePage() {
   const { language } = useLanguage();
 
   const content = {
     en: {
+      seo: {
+        title: "Professional Invoice Generator for Bangladesh | InvoicePro BD",
+        description:
+          "Create, manage, and track invoices easily with InvoicePro BD. Supports multi-language, BDT & USD payments, and local payment methods like bKash & Nagad.",
+        keywords:
+          "invoice generator, Bangladesh invoicing, multi-language invoices, Bkash payment, Nagad payment, tax compliance, BD business tools",
+        url: "https://invoice-pro-wine.vercel.app/",
+        image: "https://invoice-pro-wine.vercel.app/og-image.jpg",
+      },
+
       hero: {
         title: "Professional Invoice Generator for Bangladesh",
         subtitle:
@@ -142,6 +152,16 @@ export default function HomePage() {
       },
     },
     bn: {
+      seo: {
+        title: "বাংলাদেশের জন্য পেশাদার ইনভয়েস জেনারেটর | InvoicePro BD",
+        description:
+          "সহজেই ইনভয়েস তৈরি, পরিচালনা এবং ট্র্যাক করুন InvoicePro BD দিয়ে। মাল্টি-ল্যাঙ্গুয়েজ, টাকা ও ডলারে পেমেন্ট, বিকাশ ও নগদ সহ।",
+        keywords:
+          "ইনভয়েস জেনারেটর, বাংলাদেশ ইনভয়েস, মাল্টি-ল্যাঙ্গুয়েজ ইনভয়েস, বিকাশ পেমেন্ট, নগদ পেমেন্ট, ট্যাক্স কমপ্লায়েন্স",
+        url: "https://invoice-pro-wine.vercel.app/",
+        image: "https://invoice-pro-wine.vercel.app/og-image.jpg",
+      },
+
       hero: {
         title: "বাংলাদেশের জন্য পেশাদার ইনভয়েস জেনারেটর",
         subtitle:
@@ -270,29 +290,47 @@ export default function HomePage() {
   const t = content[language];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
-      {/* Hero Section */}
-      <HeroSection t={t} />
+    <>
+      <Head>
+        <title>{t.seo.title}</title>
+        <meta name="description" content={t.seo.description} />
+        <meta name="keywords" content={t.seo.keywords} />
+        <meta property="og:title" content={t.seo.title} />
+        <meta property="og:description" content={t.seo.description} />
+        <meta property="og:url" content={t.seo.url} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={t.seo.image} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={t.seo.title} />
+        <meta name="twitter:description" content={t.seo.description} />
+        <meta name="twitter:image" content={t.seo.image} />
+        <link rel="canonical" href={t.seo.url} />
+      </Head>
 
-      {/* Features Section */}
-      <FeaturesSection t={t} />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+        {/* Hero Section */}
+        <HeroSection t={t} />
 
-      {/* Testimonials Section */}
-      <TestimonialSection t={t} />
+        {/* Features Section */}
+        <FeaturesSection t={t} />
 
-      {/* Integrations Section */}
-      <IntegrationSection t={t} />
+        {/* Testimonials Section */}
+        <TestimonialSection t={t} />
 
-      {/* Stats Section */}
-      <StatsSection t={t} />
+        {/* Integrations Section */}
+        <IntegrationSection t={t} />
 
-      {/* CTA Section */}
-      <CTASection
-        title={t.cta.title}
-        subTitle={t.cta.subtitle}
-        buttonValue={t.cta.button}
-        icon={<ArrowRight className=" w-5 h-5" />}
-      />
-    </div>
+        {/* Stats Section */}
+        <StatsSection t={t} />
+
+        {/* CTA Section */}
+        <CTASection
+          title={t.cta.title}
+          subTitle={t.cta.subtitle}
+          buttonValue={t.cta.button}
+          icon={<ArrowRight className=" w-5 h-5" />}
+        />
+      </div>
+    </>
   );
 }

@@ -51,6 +51,7 @@ const PhoneTab = ({ currentContent, fadeInUp }: any) => {
             placeholder="+880 1XXX-XXXXXX"
             type="tel"
             icon={<Phone className="h-4 w-4" />}
+            required={true}
           />
         </motion.div>
 
@@ -70,6 +71,10 @@ const PhoneTab = ({ currentContent, fadeInUp }: any) => {
                 placeholder="123456"
                 type="text"
                 maxLength={6}
+                required={true}
+                // OTP numeric input hint
+                // If you want inputMode, update FormFieldInput to accept it
+                // inputMode="numeric"
               />
             </div>
             <div className="flex items-end">
@@ -77,6 +82,7 @@ const PhoneTab = ({ currentContent, fadeInUp }: any) => {
                 type="button"
                 variant="outline"
                 className="whitespace-nowrap"
+                aria-label={currentContent.sendOtp}
               >
                 {currentContent.sendOtp}
               </Button>

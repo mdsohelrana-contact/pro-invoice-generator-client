@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 "use client";
 
 import Link from "next/link";
@@ -31,23 +30,38 @@ const PriceCard = ({ t, isYearly }: PriceCardProps) => {
               ? "border-2 border-blue-500 shadow-xl scale-105"
               : "border shadow-lg"
           } hover:shadow-xl transition-all duration-300`}
+          aria-label={`${plan.name} pricing plan`}
+          role="region"
+          tabIndex={-1}
         >
           {plan.popular && (
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <Badge className="bg-blue-600 text-white px-4 py-1">
-                <Star className="w-4 h-4 mr-1" />
+              <Badge
+                className="bg-blue-600 text-white px-4 py-1 flex items-center"
+                aria-label="Most popular plan"
+              >
+                <Star
+                  className="w-4 h-4 mr-1"
+                  aria-hidden="true"
+                  focusable="false"
+                />
                 Most Popular
               </Badge>
             </div>
           )}
 
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-            <CardDescription className="text-gray-600">
+            <h3 className="text-2xl font-bold" id={`${key}-plan-title`}>
+              {plan.name}
+            </h3>
+            <CardDescription
+              id={`${key}-plan-description`}
+              className="text-gray-600"
+            >
               {plan.description}
             </CardDescription>
 
-            <div className="mt-4">
+            <div className="mt-4" aria-describedby={`${key}-plan-description`}>
               <div className="flex items-baseline justify-center">
                 <span className="text-4xl font-bold">
                   {plan.price[isYearly ? "yearly" : "monthly"] === 0
@@ -74,41 +88,76 @@ const PriceCard = ({ t, isYearly }: PriceCardProps) => {
           <CardContent>
             <div className="space-y-6">
               {/* Features */}
-              <div>
-                <h4 className="font-medium mb-3 text-green-700">Included:</h4>
-                <ul className="space-y-2">
-                  {plan.features.map((feature: any, index: any) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-gray-700">{feature}</span>
+              <section aria-labelledby={`${key}-features-title`}>
+                <h4
+                  id={`${key}-features-title`}
+                  className="font-medium mb-3 text-green-700"
+                >
+                  Included:
+                </h4>
+                <ul
+                  className="space-y-2 list-inside list-disc"
+                  aria-describedby={`${key}-features-list`}
+                >
+                  {plan.features.map((feature: any, index: number) => (
+                    <li
+                      key={index}
+                      className="flex items-start space-x-2 text-sm text-gray-700"
+                      tabIndex={0}
+                    >
+                      <Check
+                        className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0"
+                        aria-hidden="true"
+                        focusable="false"
+                      />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
 
               {/* Limitations */}
               {plan.limitations && plan.limitations.length > 0 && (
-                <div>
-                  <h4 className="font-medium mb-3 text-gray-500">
+                <section aria-labelledby={`${key}-limitations-title`}>
+                  <h4
+                    id={`${key}-limitations-title`}
+                    className="font-medium mb-3 text-gray-500"
+                  >
                     Not included:
                   </h4>
-                  <ul className="space-y-2">
-                    {plan.limitations.map((limitation: any, index: any) => (
-                      <li key={index} className="flex items-start space-x-2">
-                        <X className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-500">
-                          {limitation}
-                        </span>
+                  <ul
+                    className="space-y-2 list-inside list-disc"
+                    aria-describedby={`${key}-limitations-list`}
+                  >
+                    {plan.limitations.map((limitation: any, index: number) => (
+                      <li
+                        key={index}
+                        className="flex items-start space-x-2 text-sm text-gray-500"
+                        tabIndex={0}
+                      >
+                        <X
+                          className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                          aria-hidden="true"
+                          focusable="false"
+                        />
+                        <span>{limitation}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </section>
               )}
 
               <Separator />
 
-              <Link href="/dashboard" className="block">
-                <Button className="w-full">
+              <Link href="/dashboard" passHref>
+                <Button
+                  className="w-full"
+                  aria-label={`${
+                    plan.price[isYearly ? "yearly" : "monthly"] === 0
+                      ? "Get started free"
+                      : "Start free trial"
+                  } for ${plan.name} plan`}
+                >
                   {plan.price[isYearly ? "yearly" : "monthly"] === 0
                     ? "Get Started Free"
                     : "Start Free Trial"}
