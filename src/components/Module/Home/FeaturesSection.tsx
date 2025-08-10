@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import SectionHeader from "../Shared/Components/SectionHeader";
+import PrimaryStyledCard from "../Shared/Components/PrimaryStyledCard";
 
 interface Feature {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -40,9 +41,8 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ t }) => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {t.features.items.map((feature: any, index: any) => (
-            <Card
+            <PrimaryStyledCard
               key={index}
-              className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300"
               role="region"
               aria-labelledby={`feature-title-${index}`}
             >
@@ -65,7 +65,8 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ t }) => {
                   {feature.description}
                 </CardDescription>
               </CardContent>
-            </Card>
+            </PrimaryStyledCard>
+            
           ))}
         </div>
       </div>

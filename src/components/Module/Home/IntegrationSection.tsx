@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import SectionHeader from "../Shared/Components/SectionHeader";
+import PrimaryStyledCard from "../Shared/Components/PrimaryStyledCard";
 
 interface IntegrationItem {
   name: string;
@@ -34,9 +35,9 @@ const IntegrationSection: React.FC<IntegrationSectionProps> = ({ t }) => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {t.integrations.items.map((integration: any, index: any) => (
-            <Card
+            <PrimaryStyledCard
               key={index}
-              className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+              className=" text-center"
               role="region"
               aria-labelledby={`integration-title-${index}`}
             >
@@ -49,7 +50,7 @@ const IntegrationSection: React.FC<IntegrationSectionProps> = ({ t }) => {
                   {integration.description}
                 </p>
               </CardContent>
-            </Card>
+            </PrimaryStyledCard>
           ))}
         </div>
       </div>
