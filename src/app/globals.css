@@ -16,7 +16,7 @@ body {
 
 
 .gradient-text {
-  @apply bg-gradient-to-r from-[#007bff] to-[#28a745] bg-clip-text text-xl font-bold text-transparent;
+  @apply text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent;
 }
 
 

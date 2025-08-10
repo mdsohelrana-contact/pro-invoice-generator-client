@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion, easeOut } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-import { ReceiptText, Menu } from "lucide-react";
+import { ReceiptText, Menu, FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -59,14 +59,14 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         {/* Left Section: Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2"
-          aria-label="InvoicePro BD Home"
-        >
-          <ReceiptText className="h-6 w-6 primary-color" aria-hidden="true" />
-          <span className="gradient-text">InvoicePro BD</span>
-        </Link>
+           <Link href="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
+              <FileText className="w-5 h-5 text-white" />
+            </div>
+            <span className="gradient-text">
+              InvoicePro BD
+            </span>
+          </Link>
 
         {/* Center Section: Desktop Navigation */}
         <nav
