@@ -1,32 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
 import { FormMessage } from "@/components/ui/form";
 
-interface FormFieldInputProps {
+interface Option {
+  value: string | number;
+  label: string;
+  disabled?: boolean;
+}
+
+interface FormFieldSelectProps {
   control: any;
   name: string;
   label: string;
+  options: Option[];
   placeholder?: string;
-  type?: "text" | "email" | "password" | "tel" | "number";
-  icon?: React.ReactNode;
-  maxLength?: number;
   required?: boolean;
+  icon?: React.ReactNode;
+  className?: string;
 }
 
-const FormFieldInput = ({
+const FormFieldSelect = ({
   control,
   name,
   label,
+  options,
   placeholder,
-  type = "text",
-  icon,
-  maxLength,
   required = false,
-}: FormFieldInputProps) => {
+  icon,
+  className = "",
+}: FormFieldSelectProps) => {
   const errorId = `${name}-error`;
 
   return (
@@ -47,26 +52,29 @@ const FormFieldInput = ({
                 {icon}
               </span>
             )}
-            <Input
+            <select
               id={name}
               {...field}
-               value={field.value ?? ""}
-              type={type}
-              maxLength={maxLength}
-              placeholder={placeholder}
-              className={`${icon ? "pl-10" : ""}`}
               aria-invalid={fieldState.error ? "true" : "false"}
               aria-describedby={fieldState.error ? errorId : undefined}
               aria-required={required ? "true" : undefined}
               required={required}
-              autoComplete={
-                name === "email"
-                  ? "email"
-                  : name === "password"
-                  ? "current-password"
-                  : undefined
-              }
-            />
+              className={`w-full rounded-md border border-gray-300 bg-white py-2 pr-8 text-sm leading-5
+                focus:ring-2 focus:ring-blue-500 focus:outline-none
+                ${icon ? "pl-10" : "pl-3"} ${className}
+                ${fieldState.error ? "border-red-500" : "border-gray-300"}`}
+            >
+              {placeholder && (
+                <option value="" disabled hidden>
+                  {placeholder}
+                </option>
+              )}
+              {options.map(({ value, label, disabled }) => (
+                <option key={value} value={value} disabled={disabled}>
+                  {label}
+                </option>
+              ))}
+            </select>
             {fieldState.error && (
               <FormMessage id={errorId} role="alert">
                 {fieldState.error.message}
@@ -79,4 +87,4 @@ const FormFieldInput = ({
   );
 };
 
-export default FormFieldInput;
+export default FormFieldSelect;

@@ -30,7 +30,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       className={clsx(
-        "bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-lg px-8 py-3 flex items-center justify-center",
+        "bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-lg px-8 py-3 flex items-center justify-center cursor-pointer",
         className
       )}
     >

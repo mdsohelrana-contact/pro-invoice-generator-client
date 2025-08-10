@@ -27,14 +27,14 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {title && (
-        <h2
+        <h1
           className={clsx(
             "text-3xl md:text-4xl font-bold mb-4",
             titleClassName
           )}
         >
           {title}
-        </h2>
+        </h1>
       )}
       {subTitle && (
         <p className={clsx("text-xl text-gray-600", subTitleClassName)}>

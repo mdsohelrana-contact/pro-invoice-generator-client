@@ -1,32 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
 import { FormMessage } from "@/components/ui/form";
 
-interface FormFieldInputProps {
+interface FormFieldTextareaProps {
   control: any;
   name: string;
   label: string;
   placeholder?: string;
-  type?: "text" | "email" | "password" | "tel" | "number";
-  icon?: React.ReactNode;
+  rows?: number;
   maxLength?: number;
   required?: boolean;
+  icon?: React.ReactNode;
+  className?: string;
 }
 
-const FormFieldInput = ({
+const FormFieldTextarea = ({
   control,
   name,
   label,
   placeholder,
-  type = "text",
-  icon,
+  rows = 4,
   maxLength,
   required = false,
-}: FormFieldInputProps) => {
+  icon,
+  className = "",
+}: FormFieldTextareaProps) => {
   const errorId = `${name}-error`;
 
   return (
@@ -41,31 +42,27 @@ const FormFieldInput = ({
           <div className="relative">
             {icon && (
               <span
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                className="absolute left-3 top-3 text-gray-400 pointer-events-none"
                 aria-hidden="true"
               >
                 {icon}
               </span>
             )}
-            <Input
+            <textarea
               id={name}
               {...field}
-               value={field.value ?? ""}
-              type={type}
+              rows={rows}
               maxLength={maxLength}
               placeholder={placeholder}
-              className={`${icon ? "pl-10" : ""}`}
+              className={`w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none
+                ${
+                  icon ? "pl-10" : "pl-3"
+                } py-2 pr-3 text-sm leading-5 ${className}
+                ${fieldState.error ? "border-red-500" : "border-gray-300"}`}
               aria-invalid={fieldState.error ? "true" : "false"}
               aria-describedby={fieldState.error ? errorId : undefined}
               aria-required={required ? "true" : undefined}
               required={required}
-              autoComplete={
-                name === "email"
-                  ? "email"
-                  : name === "password"
-                  ? "current-password"
-                  : undefined
-              }
             />
             {fieldState.error && (
               <FormMessage id={errorId} role="alert">
@@ -79,4 +76,4 @@ const FormFieldInput = ({
   );
 };
 
-export default FormFieldInput;
+export default FormFieldTextarea;
