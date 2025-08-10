@@ -18,7 +18,10 @@ const notoBengali = Noto_Sans_Bengali({
 
 // Global metadata (fallback)
 export const metadata: Metadata = {
-  title: "InvoicePro BD - Professional Invoice Generator for Bangladesh",
+  title: {
+    default: "InvoicePro BD - Professional Invoice Generator for Bangladesh",
+    template: "%s | InvoicePro BD",
+  },
   description:
     "Create professional invoices for your Bangladeshi business with multi-language support, local payment methods (bKash, Nagad, Bank), and tax compliance. Fast, secure, and easy to use.",
   applicationName: "InvoicePro BD",
@@ -107,8 +110,6 @@ export default function RootLayout({
           `}
         </Script>
 
-        
-
         {/* Keywords */}
         <meta
           name="keywords"
@@ -166,14 +167,14 @@ export default function RootLayout({
         <LanguageProvider>
           <Header />
 
-           <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=GTM-PR5C8BV2`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=GTM-PR5C8BV2`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
           <main className="min-h-screen">{children}</main>
           <Footer />
           <Toaster />

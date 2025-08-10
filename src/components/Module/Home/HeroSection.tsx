@@ -38,7 +38,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/dashboard">
             {/* Primary Button */}
-            <PrimaryButton size="lg" icon={<ArrowRight />}>
+            <PrimaryButton className="w-full" size="lg" icon={<ArrowRight />}>
               {t.hero.cta}
             </PrimaryButton>
           </Link>
