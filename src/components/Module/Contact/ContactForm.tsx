@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useLanguage } from "@/components/context/LanguageContext";
 import { Send } from "lucide-react";
+import { useStore } from "@/lib/store";
 
 const formSchema = z.object({
   name: z.string().min(1, "Please enter your full name"),
@@ -37,7 +38,7 @@ const inquiryTypes = [
 ];
 
 const ContactForm = () => {
-  const { language } = useLanguage();
+   const { language } = useStore();
 
   const translatedInquiryTypes = inquiryTypes.map(({ value, label }) => ({
     value,

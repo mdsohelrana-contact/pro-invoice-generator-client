@@ -10,10 +10,11 @@ import PricingFeatures from "@/components/Module/Pricing/PricingFeatures";
 import PricingFaq from "@/components/Module/Pricing/PricingFaq";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
 import { pricingContent } from "@/data/pricingData";
+import { useStore } from "@/lib/store";
 
 const PricingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
-  const { language } = useLanguage();
+  const { language } = useStore();
 
   const t = pricingContent[language];
 

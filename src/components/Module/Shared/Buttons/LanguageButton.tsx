@@ -1,14 +1,15 @@
-import { useLanguage } from "@/components/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
 import clsx from "clsx"; // Optional but makes life easier
+import { useStore } from "@/lib/store";
 
 interface LanguageButtonProps {
   className?: string;
 }
 
 const LanguageButton = ({ className }: LanguageButtonProps) => {
-  const { language, setLanguage } = useLanguage();
+  const language = useStore((state) => state.language);
+  const setLanguage = useStore((state) => state.setLanguage);
 
   return (
     <Button

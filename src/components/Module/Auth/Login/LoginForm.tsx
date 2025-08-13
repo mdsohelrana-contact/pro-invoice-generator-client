@@ -16,6 +16,7 @@ import EmailTab from "./EmailTab";
 import PhoneTab from "./PhoneTab";
 import PrimaryButton from "../../Shared/Buttons/PrimaryButton";
 import Head from "next/head";
+import { useStore } from "@/lib/store";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -23,7 +24,7 @@ const fadeInUp = {
   transition: { duration: 0.5 },
 };
 const LoginForm = () => {
-  const { language } = useLanguage();
+   const { language } = useStore();
   const [showPassword, setShowPassword] = useState(false);
   const [loginMethod, setLoginMethod] = useState<"email" | "otp">("email");
 

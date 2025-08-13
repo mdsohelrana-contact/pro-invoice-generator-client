@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 :root {
   --font-english: 'Inter', sans-serif;
   --font-bengali: var(--font-bengali), sans-serif;
+  --font-montserrat: var(--font-montserrat), sans-serif;
+  --font-roboto-mono: var(--font-roboto-mono), monospace;
 }
 
 body {
@@ -14,6 +18,13 @@ body {
   font-family: var(--font-bengali);
 }
 
+.montserrat-text {
+  font-family: var(--font-montserrat);
+}
+
+.roboto-mono-text {
+  font-family: var(--font-roboto-mono);
+}
 
 .gradient-text {
   @apply text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent;

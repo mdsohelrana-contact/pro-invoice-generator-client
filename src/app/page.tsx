@@ -16,11 +16,12 @@ import TestimonialSection from "@/components/Module/Home/TestmonialSection";
 import IntegrationSection from "@/components/Module/Home/IntegrationSection";
 import StatsSection from "@/components/Module/Home/StatsSection";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
-import { useLanguage } from "../components/context/LanguageContext";
+
 import Head from "next/head";
+import { useStore } from "@/lib/store";
 
 export default function HomePage() {
-  const { language } = useLanguage();
+  const { language } = useStore();
 
   const content = {
     en: {

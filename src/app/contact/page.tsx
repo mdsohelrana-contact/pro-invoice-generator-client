@@ -21,9 +21,10 @@ import ContactForm from "@/components/Module/Contact/ContactForm";
 import OfficeHour from "@/components/Module/Contact/OfficeHour";
 import FAQQuickLinks from "@/components/Module/Contact/FAQQuickLinks";
 import FastResponseCard from "@/components/Module/Contact/FastResponseCard";
+import { useStore } from "@/lib/store";
 
 const ContactPage = () => {
-  const { language } = useLanguage();
+    const { language } = useStore();
 
   const contactInfo = [
     {

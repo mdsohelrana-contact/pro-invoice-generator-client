@@ -8,9 +8,10 @@ import MissionVision from "@/components/Module/About/MissionVision";
 import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";
 import AnimatedDoubleCTASection from "@/components/Module/Shared/Components/AnimatedDoubleCTASection";
 import { aboutContent } from "@/data/aboutData";
+import { useStore } from "@/lib/store";
 
 const AboutPage = () => {
-  const { language } = useLanguage();
+   const { language } = useStore();
   const t = aboutContent[language];
 
   return (

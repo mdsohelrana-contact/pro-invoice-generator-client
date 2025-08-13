@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Noto_Sans_Bengali } from "next/font/google";
+import { Inter, Montserrat, Roboto_Mono, Noto_Sans_Bengali } from "next/font/google";
+
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Module/Shared/Header/Header";
@@ -10,11 +10,25 @@ import Script from "next/script";
 
 // Load English + Bangla fonts
 const inter = Inter({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100","400","700","900"], // choose weights you want
+  variable: "--font-montserrat",
+});
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  weight: ["100","400","700"],
+  variable: "--font-roboto-mono",
+});
+
 const notoBengali = Noto_Sans_Bengali({
   weight: ["400", "700"],
   subsets: ["bengali"],
   variable: "--font-bengali",
 });
+
+
 
 // Global metadata (fallback)
 export const metadata: Metadata = {
@@ -71,7 +85,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.className} ${notoBengali.variable}`}
+       className={`${notoBengali.variable} ${montserrat.variable} ${robotoMono.variable}`}
       suppressHydrationWarning
     >
       <head>

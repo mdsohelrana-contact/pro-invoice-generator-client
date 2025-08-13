@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/components/context/LanguageContext";
 import SectionHeader from "../Shared/Components/SectionHeader";
 import InfoCard from "../Shared/Components/InfoCard";
+import { useStore } from "@/lib/store";
 
 interface ValueProps {
   icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -14,7 +15,7 @@ interface ValueProps {
 }
 
 const OurValues = ({ values }: { values: ValueProps[] }) => {
-  const { language } = useLanguage();
+  const { language } = useStore();
 
   return (
     <motion.section

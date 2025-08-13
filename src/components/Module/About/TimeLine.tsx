@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/components/context/LanguageContext";
 import SectionHeader from "../Shared/Components/SectionHeader";
+import { useStore } from "@/lib/store";
 
 interface Milestone {
   year: string;
@@ -18,7 +19,7 @@ interface TimeLineProps {
 }
 
 const TimeLine = ({ milestones }: TimeLineProps) => {
-  const { language } = useLanguage();
+   const { language } = useStore();
   const sectionTitleId = "timeline-title";
 
   return (

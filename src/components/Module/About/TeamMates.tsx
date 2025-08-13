@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/components/context/LanguageContext";
 import Image from "next/image";
 import SectionHeader from "../Shared/Components/SectionHeader";
+import { useStore } from "@/lib/store";
 
 interface Team {
   name: string;
@@ -18,7 +19,7 @@ interface TeamProps {
 }
 
 const TeamMates = ({ team }: TeamProps) => {
-  const { language } = useLanguage();
+   const { language } = useStore();
 
   return (
     <motion.section
