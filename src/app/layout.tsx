@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, Roboto_Mono, Noto_Sans_Bengali } from "next/font/google";
+import {
+  Inter,
+  Montserrat,
+  Roboto_Mono,
+  Noto_Sans_Bengali,
+} from "next/font/google";
 
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import Header from "@/components/Module/Shared/Header/Header";
-import Footer from "@/components/Module/Shared/Footer/Footer";
 import { LanguageProvider } from "../components/context/LanguageContext";
 import Script from "next/script";
 
@@ -13,12 +16,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["100","400","700","900"], // choose weights you want
+  weight: ["100", "400", "700", "900"], // choose weights you want
   variable: "--font-montserrat",
 });
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
-  weight: ["100","400","700"],
+  weight: ["100", "400", "700"],
   variable: "--font-roboto-mono",
 });
 
@@ -27,8 +30,6 @@ const notoBengali = Noto_Sans_Bengali({
   subsets: ["bengali"],
   variable: "--font-bengali",
 });
-
-
 
 // Global metadata (fallback)
 export const metadata: Metadata = {
@@ -85,7 +86,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-       className={`${notoBengali.variable} ${montserrat.variable} ${robotoMono.variable}`}
+      className={`${notoBengali.variable} ${montserrat.variable} ${robotoMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -179,8 +180,6 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <LanguageProvider>
-          <Header />
-
           <noscript>
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=GTM-PR5C8BV2`}
@@ -189,9 +188,10 @@ export default function RootLayout({
               style={{ display: "none", visibility: "hidden" }}
             ></iframe>
           </noscript>
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <Toaster />
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-1">{children}</main>
+            <Toaster />
+          </div>
         </LanguageProvider>
       </body>
     </html>

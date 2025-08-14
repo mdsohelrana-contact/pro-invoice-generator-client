@@ -8,6 +8,14 @@
   --font-bengali: var(--font-bengali), sans-serif;
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-roboto-mono: var(--font-roboto-mono), monospace;
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 body {
@@ -30,14 +38,12 @@ body {
   @apply text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent;
 }
 
-
 .primary-color {
   @apply text-[#007bff];
 }
 .primary-color:hover {
   @apply text-[#0056b3]; /* A darker blue for hover */
 }
-
 
 @custom-variant dark (&:is(.dark *));
 

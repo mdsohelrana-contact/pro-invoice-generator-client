@@ -113,11 +113,11 @@ export default function Header() {
 
           {/* Get Started Button */}
           <Button
-            className="bg-gradient-to-r from-[#007bff] to-[#28a745] text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+            className="bg-gradient-to-r from-[#007bff] to-[#28a745] text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer"
             size="sm"
             aria-label="Get Started with InvoicePro BD"
           >
-            Get Started
+            <Link href="/dashboard">Get Started</Link>
           </Button>
 
           {/* Mobile Menu Trigger */}
@@ -188,16 +188,10 @@ export default function Header() {
                   />
 
                   <PrimaryButton aria-label="Get Started with InvoicePro BD">
-                    <Link
-                      href="/login"
-                      className="hidden md:flex btn btn-ghost btn-sm"
-                      aria-label="Login"
-                    >
-                      Login
-                    </Link>
+                    <Link href="/login">Login</Link>
                   </PrimaryButton>
                   <PrimaryButton aria-label="Get Started with InvoicePro BD">
-                    Get Started
+                    <Link href="/dashboard">Get Started</Link>
                   </PrimaryButton>
                 </div>
               </div>

@@ -105,7 +105,7 @@ const PricingPage = () => {
           <h2 id="cta-heading" className="sr-only">
             {language === "en" ? "Call to Action" : "কল টু অ্যাকশন"}
           </h2>
-          <CTASection
+          <CTASection className="bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 rounded-2xl text-white"
             title={
               language === "en"
                 ? "Ready to Get Started?"
