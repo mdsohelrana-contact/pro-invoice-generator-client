@@ -1,15 +1,16 @@
 "use client";
 
 import React from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import { CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import SectionHeader from "../Shared/Components/SectionHeader";
 import PrimaryStyledCard from "../Shared/Components/PrimaryStyledCard";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 interface TestimonialItem {
   name: string;
@@ -30,38 +31,9 @@ interface TestimonialSectionProps {
 }
 
 const TestimonialSection: React.FC<TestimonialSectionProps> = ({ t }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 640, // mobile
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-    // Accessibility & ARIA
-    accessibility: true,
-    adaptiveHeight: true,
-  };
-
   return (
     <section
-      className="py-20 px-6 bg-gradient-to-r from-blue-100 via-green-50 to-teal-100"
+      className="py-20 px-6 bg-gradient-to-r from-blue-50 via-green-50 to-teal-50"
       aria-label="Customer testimonials"
     >
       <div className="container mx-auto">
@@ -71,17 +43,26 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ t }) => {
           className="mb-12"
         />
 
-        <Slider {...settings} aria-live="polite">
+        <Swiper
+          modules={[Pagination, Autoplay, A11y]}
+          spaceBetween={24}
+          slidesPerView={3}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          a11y={{
+            prevSlideMessage: "Previous testimonial",
+            nextSlideMessage: "Next testimonial",
+          }}
+          className="testimonial-swiper"
+        >
           {t.testimonials.items.map((testimonial, index) => (
-            <div
-              key={index}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`Testimonial ${index + 1} of ${
-                t.testimonials.items.length
-              }`}
-              className="px-3"
-            >
+            <SwiperSlide key={index} className="px-2">
               <PrimaryStyledCard
                 role="article"
                 aria-labelledby={`testimonial-title-${index}`}
@@ -129,9 +110,9 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ t }) => {
                   </div>
                 </CardContent>
               </PrimaryStyledCard>
-            </div>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </div>
     </section>
   );

@@ -41,7 +41,6 @@ interface InvoicePreviewDialogProps {
   handleDownloadTemplate: (template: InvoiceTemplate) => void;
 }
 
-
 const InvoicePreviewDialog: React.FC<InvoicePreviewDialogProps> = ({
   selectedTemplate,
   setSelectedTemplate,
@@ -91,11 +90,6 @@ const InvoicePreviewDialog: React.FC<InvoicePreviewDialogProps> = ({
             className="space-y-6 mt-4"
             initial="hidden"
             animate="visible"
-            // variants={
-            //   selectedTemplate.id
-            //     ? contentVariants
-            //     : { hidden: { opacity: 0 }, visible: { opacity: 1 } }
-            // }
             key={selectedTemplate.id} // animate on template change
           >
             <div className="grid md:grid-cols-2 gap-6">
@@ -168,9 +162,9 @@ const InvoicePreviewDialog: React.FC<InvoicePreviewDialogProps> = ({
                   </span>
                 </div>
 
-                <div className="flex space-x-3">
+                <div className="flex gap-2 flex-wrap">
                   <Button
-                    className="flex-1"
+                    className="w-full cursor-pointer"
                     onClick={() =>
                       selectedTemplate && handleUseTemplate(selectedTemplate)
                     }
@@ -204,6 +198,7 @@ const InvoicePreviewDialog: React.FC<InvoicePreviewDialogProps> = ({
                         ? "Download Template"
                         : "টেমপ্লেট ডাউনলোড করুন"
                     }
+                    className="w-full cursor-pointer"
                   >
                     <Download className="w-4 h-4 mr-2" aria-hidden="true" />
                     {language === "en" ? "Download" : "ডাউনলোড"}
@@ -224,7 +219,7 @@ const InvoicePreviewDialog: React.FC<InvoicePreviewDialogProps> = ({
                     <Link href="/pricing" passHref>
                       <Button
                         size="sm"
-                        className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                        className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 cursor-pointer"
                         aria-label={
                           language === "en"
                             ? "Upgrade Now"
