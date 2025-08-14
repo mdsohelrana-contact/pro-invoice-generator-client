@@ -19,12 +19,12 @@ const LanguageButton = ({ className }: LanguageButtonProps) => {
       className={clsx(
         // default language-based classes
         language === "en"
-          ? "hidden text-green-600 font-bold"
-          : "block text-blue-600 font-medium",
+          ? "hidden text-green-600 font-bold cursor-pointer"
+          : "block text-blue-600 font-medium cursor-pointer",
         className // extra className from outside
       )}
     >
-      <Globe className="h-4 w-4 mr-1" />
+      <Globe className="h-4 w-4 mr-1 " />
       {language === "en" ? "বাংলা" : "English"}
     </Button>
   );

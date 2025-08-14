@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { useLanguage } from "@/components/context/LanguageContext";
 import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";
 import PriceCard from "@/components/Module/Pricing/PriceCard";
 import PricingFeatures from "@/components/Module/Pricing/PricingFeatures";
@@ -111,16 +110,6 @@ const PricingPage = () => {
               language === "en"
                 ? "Ready to Get Started?"
                 : "শুরু করতে প্রস্তুত?"
-            }
-            subTitle={
-              language === "en"
-                ? "Join thousands of businesses using InvoicePro BD"
-                : "হাজার হাজার ব্যবসায়ীর সাথে যোগ দিন যারা InvoicePro BD ব্যবহার করছেন"
-            }
-            buttonValue={
-              language === "en"
-                ? "Start Your Free Trial"
-                : "আপনার ফ্রি ট্রায়াল শুরু করুন"
             }
           />
         </section>

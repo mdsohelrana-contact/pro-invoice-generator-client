@@ -59,14 +59,12 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         {/* Left Section: Logo */}
-           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
-              <FileText className="w-5 h-5 text-white" />
-            </div>
-            <span className="gradient-text">
-              InvoicePro BD
-            </span>
-          </Link>
+        <Link href="/" className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
+            <FileText className="w-5 h-5 text-white" />
+          </div>
+          <span className="gradient-text">InvoicePro BD</span>
+        </Link>
 
         {/* Center Section: Desktop Navigation */}
         <nav
@@ -128,11 +126,11 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden"
+                className="lg:hidden cursor-pointer"
                 aria-label="Toggle navigation menu"
                 aria-controls="mobile-menu"
               >
-                <Menu className="h-6 w-6" aria-hidden="true" />
+                <Menu className="h-6 w-6 cursor-pointer" aria-hidden="true" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
@@ -189,13 +187,15 @@ export default function Header() {
                     aria-label="Switch language"
                   />
 
-                  <Link
-                    href="/login"
-                    className="hidden md:flex btn btn-ghost btn-sm"
-                    aria-label="Login"
-                  >
-                    Login
-                  </Link>
+                  <PrimaryButton aria-label="Get Started with InvoicePro BD">
+                    <Link
+                      href="/login"
+                      className="hidden md:flex btn btn-ghost btn-sm"
+                      aria-label="Login"
+                    >
+                      Login
+                    </Link>
+                  </PrimaryButton>
                   <PrimaryButton aria-label="Get Started with InvoicePro BD">
                     Get Started
                   </PrimaryButton>

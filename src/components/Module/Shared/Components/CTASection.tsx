@@ -3,25 +3,26 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import { Button } from "@/components/ui/button";
 
 export interface CTASectionProps {
   title?: string;
   subTitle?: string;
   buttonValue?: string;
-  icon?: React.ReactNode;
-  onClick?: () => void;
+  icon?: React.ReactNode; // optional icon
+  variant?: "outline" | "solid"; // button style
 }
 
 const CTASection = ({
   title,
   subTitle,
-  buttonValue,
+  buttonValue = "Get Started",
   icon,
+  variant = "solid",
 }: CTASectionProps) => {
   return (
     <section
-      className="py-20 px-4 bg-white"
+      className="text-center p-12 bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 rounded-2xl text-white"
       role="region"
       aria-labelledby="cta-section-title"
     >
@@ -35,24 +36,26 @@ const CTASection = ({
           </h2>
         )}
         {subTitle && (
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            {subTitle}
-          </p>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">{subTitle}</p>
         )}
+
         <div className="flex justify-center">
           <Link
             href="/dashboard"
-            passHref
-            aria-label={buttonValue || "Call to Action"}
+            aria-label={buttonValue}
           >
-            <PrimaryButton
+            <Button
               size="lg"
-              icon={icon || <ArrowRight />}
-              className="inline-flex items-center"
+              className={`px-8 py-3 cursor-pointer ${
+                variant === "outline"
+                  ? "border border-white text-white hover:bg-white hover:text-blue-600"
+                  : "bg-white text-blue-600 hover:bg-gray-100"
+              } inline-flex items-center gap-2`}
               aria-describedby="cta-section-title"
             >
-              {buttonValue || "Get Started"}
-            </PrimaryButton>
+              {buttonValue}
+              {icon ?? <ArrowRight className="w-5 h-5" />}
+            </Button>
           </Link>
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import PrimaryButton from "../Shared/Buttons/PrimaryButton";
 
 interface PriceCardProps {
   t: Record<string, any>;
@@ -150,8 +151,8 @@ const PriceCard = ({ t, isYearly }: PriceCardProps) => {
               <Separator />
 
               <Link href="/dashboard" passHref>
-                <Button
-                  className="w-full"
+                <PrimaryButton
+                  className="w-full mt-2"
                   aria-label={`${
                     plan.price[isYearly ? "yearly" : "monthly"] === 0
                       ? "Get started free"
@@ -161,7 +162,7 @@ const PriceCard = ({ t, isYearly }: PriceCardProps) => {
                   {plan.price[isYearly ? "yearly" : "monthly"] === 0
                     ? "Get Started Free"
                     : "Start Free Trial"}
-                </Button>
+                </PrimaryButton>
               </Link>
             </div>
           </CardContent>
