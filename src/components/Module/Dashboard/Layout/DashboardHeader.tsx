@@ -63,7 +63,7 @@ export function Header() {
       </div>
       <div className="flex items-center justify-between flex-1">
         {/* Search */}
-        <div className="flex-1 max-w-md">
+        {/* <div className="flex-1 max-w-md">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
@@ -73,7 +73,7 @@ export function Header() {
               className="pl-10"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Right side actions */}
         <div className="flex items-center space-x-4">
