@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Plus, Trash2, Save, Send, Eye, Calculator, User, Building, FileText, Calendar } from 'lucide-react'
 import { toast } from 'sonner'
+import { TCustomer } from '@/types/customer.type'
 
 interface InvoiceItem {
   id: string
@@ -21,13 +22,7 @@ interface InvoiceItem {
   amount: number
 }
 
-interface Customer {
-  id: string
-  name: string
-  email: string
-  phone: string
-  address: string
-}
+
 
 const CreateInvoicePage = () => {
     const router = useRouter()
@@ -46,7 +41,7 @@ const CreateInvoicePage = () => {
   })
 
   // Customer data
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
+  const [selectedCustomer, setSelectedCustomer] = useState<TCustomer | null>(null)
   const [newCustomer, setNewCustomer] = useState({
     name: '',
     email: '',
@@ -67,7 +62,7 @@ const CreateInvoicePage = () => {
   ])
 
   // Mock customers data
-  const customers: Customer[] = [
+  const customers: TCustomer[] = [
     {
       id: '1',
       name: 'Ahmed Hassan',
@@ -140,7 +135,7 @@ const CreateInvoicePage = () => {
       return
     }
 
-    const customer: Customer = {
+    const customer: TCustomer = {
       id: Date.now().toString(),
       ...newCustomer
     }

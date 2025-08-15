@@ -31,10 +31,11 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useStore } from "@/lib/store"
+
 import Link from 'next/link'
 import { toast } from 'sonner'
-import InvoiceShare from '@/components/Module/Shared/utils/InvoiceShare'
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 // Mock data
 const mockInvoices = [
@@ -114,7 +115,7 @@ const statusConfig = {
 }
 
 const InvoiceHome = () => {
-      const { language } = useStore()
+  const language = useSelector(selectLanguage);
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedInvoices, setSelectedInvoices] = useState<string[]>([])

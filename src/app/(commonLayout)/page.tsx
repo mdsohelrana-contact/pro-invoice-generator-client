@@ -18,10 +18,11 @@ import StatsSection from "@/components/Module/Home/StatsSection";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
 
 import Head from "next/head";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 export default function HomePage() {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   const content = {
     en: {
@@ -311,6 +312,7 @@ export default function HomePage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
         {/* Hero Section */}
         <HeroSection t={t} />
+        
 
         {/* Features Section */}
         <FeaturesSection t={t} />

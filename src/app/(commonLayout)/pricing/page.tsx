@@ -9,11 +9,12 @@ import PricingFeatures from "@/components/Module/Pricing/PricingFeatures";
 import PricingFaq from "@/components/Module/Pricing/PricingFaq";
 import CTASection from "@/components/Module/Shared/Components/CTASection";
 import { pricingContent } from "@/data/pricingData";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const PricingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   const t = pricingContent[language];
 

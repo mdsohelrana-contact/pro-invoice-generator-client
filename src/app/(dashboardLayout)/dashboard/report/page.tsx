@@ -30,8 +30,11 @@ import {
 import { useStore } from "@/lib/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 const ReportPage = () => {
-  const { language, addNotification } = useStore();
+  const language = useSelector(selectLanguage);
+  const {  addNotification } = useStore();
   const [reportType, setReportType] = React.useState<
     "bug" | "feature" | "general"
   >("bug");

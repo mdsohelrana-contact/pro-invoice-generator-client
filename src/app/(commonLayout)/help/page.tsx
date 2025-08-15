@@ -24,11 +24,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useStore } from "@/lib/store";
 import Link from "next/link";
 import PrimaryButton from "@/components/Module/Shared/Buttons/PrimaryButton";
 import AnimatedDoubleCTASection from "@/components/Module/Shared/Components/AnimatedDoubleCTASection";
-import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -36,7 +36,7 @@ const fadeInUp = {
   transition: { duration: 0.5 },
 };
 const HelpPage = () => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
   const [searchTerm, setSearchTerm] = useState("");
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(
     {}

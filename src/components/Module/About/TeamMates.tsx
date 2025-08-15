@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { useLanguage } from "@/components/context/LanguageContext";
 import Image from "next/image";
 import SectionHeader from "../Shared/Components/SectionHeader";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 interface Team {
   name: string;
@@ -19,7 +19,7 @@ interface TeamProps {
 }
 
 const TeamMates = ({ team }: TeamProps) => {
-   const { language } = useStore();
+ const language = useSelector(selectLanguage);
 
   return (
     <motion.section

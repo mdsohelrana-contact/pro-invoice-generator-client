@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 import { MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,7 +20,7 @@ const WhatsAppIntegration = ({
   customerPhone,
   shareLink,
 }: WhatsAppShareProps) => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   const [message, setMessage] = React.useState(
     language === "en"

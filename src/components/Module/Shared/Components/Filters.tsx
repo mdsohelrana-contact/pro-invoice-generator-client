@@ -10,7 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 import { Button } from "@/components/ui/button";
 
 export interface Category {
@@ -37,7 +38,7 @@ const Filters: React.FC<FiltersProps> = ({
   setViewMode,
   categories,
 }) => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   return (
     <motion.section

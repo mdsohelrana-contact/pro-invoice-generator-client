@@ -10,13 +10,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { useLanguage } from "@/components/context/LanguageContext";
 import LanguageButton from "../../Shared/Buttons/LanguageButton";
 import EmailTab from "./EmailTab";
 import PhoneTab from "./PhoneTab";
 import PrimaryButton from "../../Shared/Buttons/PrimaryButton";
 import Head from "next/head";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -24,7 +24,7 @@ const fadeInUp = {
   transition: { duration: 0.5 },
 };
 const LoginForm = () => {
-   const { language } = useStore();
+ const language = useSelector(selectLanguage);
   const [showPassword, setShowPassword] = useState(false);
   const [loginMethod, setLoginMethod] = useState<"email" | "otp">("email");
 

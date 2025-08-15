@@ -1,6 +1,5 @@
 "use client";
 
-import { useLanguage } from "@/components/context/LanguageContext";
 import TimeLine from "@/components/Module/About/TimeLine";
 import TeamMates from "@/components/Module/About/TeamMates";
 import OurValues from "@/components/Module/About/OurValues";
@@ -8,10 +7,11 @@ import MissionVision from "@/components/Module/About/MissionVision";
 import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";
 import AnimatedDoubleCTASection from "@/components/Module/Shared/Components/AnimatedDoubleCTASection";
 import { aboutContent } from "@/data/aboutData";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const AboutPage = () => {
-   const { language } = useStore();
+ const language = useSelector(selectLanguage);
   const t = aboutContent[language];
 
   return (

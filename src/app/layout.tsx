@@ -10,6 +10,9 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { LanguageProvider } from "../components/context/LanguageContext";
 import Script from "next/script";
+import store from "@/store/store";
+import { Provider } from "react-redux";
+import ProvidersWrapper from "@/Provider/ProvidersWrapper";
 
 // Load English + Bangla fonts
 const inter = Inter({ subsets: ["latin"] });
@@ -179,7 +182,7 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <LanguageProvider>
+        <ProvidersWrapper>
           <noscript>
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=GTM-PR5C8BV2`}
@@ -192,7 +195,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Toaster />
           </div>
-        </LanguageProvider>
+        </ProvidersWrapper>
       </body>
     </html>
   );

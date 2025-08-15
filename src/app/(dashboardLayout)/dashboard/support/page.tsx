@@ -15,8 +15,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 const HelpSupportPage = () => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const helpTopics = [

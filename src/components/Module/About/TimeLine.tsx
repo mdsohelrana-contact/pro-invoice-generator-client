@@ -4,9 +4,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useLanguage } from "@/components/context/LanguageContext";
 import SectionHeader from "../Shared/Components/SectionHeader";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 interface Milestone {
   year: string;
@@ -19,7 +19,7 @@ interface TimeLineProps {
 }
 
 const TimeLine = ({ milestones }: TimeLineProps) => {
-   const { language } = useStore();
+ const language = useSelector(selectLanguage);
   const sectionTitleId = "timeline-title";
 
   return (

@@ -14,9 +14,11 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useLanguage } from "@/components/context/LanguageContext";
+
 import { Send } from "lucide-react";
-import { useStore } from "@/lib/store";
+
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const formSchema = z.object({
   name: z.string().min(1, "Please enter your full name"),
@@ -38,7 +40,7 @@ const inquiryTypes = [
 ];
 
 const ContactForm = () => {
-   const { language } = useStore();
+ const language = useSelector(selectLanguage);
 
   const translatedInquiryTypes = inquiryTypes.map(({ value, label }) => ({
     value,

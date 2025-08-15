@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { useLanguage } from "@/components/context/LanguageContext";
 import SectionHeader from "../Shared/Components/SectionHeader";
 import InfoCard from "../Shared/Components/InfoCard";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 interface ValueProps {
   icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -15,7 +15,7 @@ interface ValueProps {
 }
 
 const OurValues = ({ values }: { values: ValueProps[] }) => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   return (
     <motion.section

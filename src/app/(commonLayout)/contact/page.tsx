@@ -1,19 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  MessageCircle,
-  CheckCircle,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import Link from "next/link";
-
-import { useLanguage } from "@/components/context/LanguageContext";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 import InfoCard from "@/components/Module/Shared/Components/InfoCard";
 import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";
@@ -21,10 +9,11 @@ import ContactForm from "@/components/Module/Contact/ContactForm";
 import OfficeHour from "@/components/Module/Contact/OfficeHour";
 import FAQQuickLinks from "@/components/Module/Contact/FAQQuickLinks";
 import FastResponseCard from "@/components/Module/Contact/FastResponseCard";
-import { useStore } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 const ContactPage = () => {
-    const { language } = useStore();
+  const language = useSelector(selectLanguage);
 
   const contactInfo = [
     {

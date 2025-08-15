@@ -1,11 +1,12 @@
 "use client";
 
-import { useLanguage } from "@/components/context/LanguageContext";
+
 import { Button } from "@/components/ui/button";
-import { useStore } from "@/lib/store";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 interface CTAButton {
   href: string;
@@ -25,7 +26,7 @@ const AnimatedDoubleCTASection: React.FC<AnimatedDoubleCTASectionProps> = ({
   subTitle,
   buttons,
 }) => {
-  const { language } = useStore();
+const language = useSelector(selectLanguage);
 
   return (
     <motion.section
