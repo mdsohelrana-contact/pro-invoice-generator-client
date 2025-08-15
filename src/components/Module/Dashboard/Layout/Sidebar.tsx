@@ -12,14 +12,7 @@ import {
   Users,
   HelpCircle,
   AlertTriangle,
-  ChevronUp,
   ChevronDown,
-  User2,
-  LogOut,
-  Sun,
-  Moon,
-  Monitor,
-  Bell,
   Plus,
   Building2,
   DollarSign,
@@ -32,7 +25,6 @@ import { usePathname } from "next/navigation";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -47,16 +39,6 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useStore } from "@/lib/store";
 import { useTheme } from "next-themes";
@@ -73,11 +55,11 @@ const data = {
     { title: "Dashboard", url: "/dashboard", icon: Home, isActive: true },
     {
       title: "Invoices",
-      url: "/invoices",
+      url: "/invoice",
       icon: FileText,
       badge: "12",
       items: [
-        { title: "All Invoices", url: "/invoices", icon: FileText },
+        { title: "All Invoices", url: "/dashboard/invoice", icon: FileText },
         { title: "Templates", url: "/templates", icon: Building2 },
         {
           title: "Drafts",
@@ -87,7 +69,7 @@ const data = {
         },
       ],
     },
-    { title: "Products", url: "/products", icon: Package },
+    { title: "Products", url: "/dashboard/products", icon: Package },
     {
       title: "Payments",
       url: "/payments",
@@ -152,11 +134,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-semibold text-sidebar-foreground">
                     InvoicePro
                   </span>
-                  <span className="truncate text-sm text-sidebar-foreground/70">
-                    {language === "en"
-                      ? "Professional Invoicing"
-                      : "পেশাদার ইনভয়েসিং"}
-                  </span>
+               
+                    <Badge className="bg-orange-100 my-1 text-orange-800">
+                      {language === "en" ? "Free Plan" : "ফ্রি প্ল্যান"} - 3/5
+                      invoices used
+                    </Badge>
+                  
                 </div>
                 {unreadCount > 0 && (
                   <Badge

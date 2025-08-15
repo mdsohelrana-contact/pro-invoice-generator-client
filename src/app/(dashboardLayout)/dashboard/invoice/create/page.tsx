@@ -605,7 +605,7 @@ const CreateInvoicePage = () => {
                     <div>
                       <h4 className="font-medium mb-3">Items:</h4>
                       <div className="space-y-2">
-                        {items.map((item, index) => (
+                        {items.map((item) => (
                           <div key={item.id} className="flex justify-between items-center text-sm">
                             <div className="flex-1">
                               <p className="font-medium">{item.description}</p>
