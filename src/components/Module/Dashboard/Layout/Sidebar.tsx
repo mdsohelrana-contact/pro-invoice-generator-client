@@ -40,14 +40,15 @@ import {
 } from "@/components/ui/sidebar";
 
 import { Badge } from "@/components/ui/badge";
-import { useStore } from "@/lib/store";
-import { useTheme } from "next-themes";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
+import { selectNotifications } from "@/store/slices/notificationSlice";
 
 // Main navigation items
 const data = {
@@ -110,11 +111,13 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    // const user = useSelector(selectCurrentUser);
+  const language = useSelector(selectLanguage);
   const pathname = usePathname();
-  const { user, language, logout, notifications } = useStore();
-  const { theme, setTheme } = useTheme();
+ const notifications = useSelector(selectNotifications);
 
-  const unreadCount = notifications?.list?.filter((n) => !n.read).length || 0;
+
+  const unreadCount = notifications?.filter((n) => !n.read).length || 0;
 
   return (
     <Sidebar collapsible="icon" className="border-r" {...props}>

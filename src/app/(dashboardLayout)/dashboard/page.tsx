@@ -31,10 +31,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useSelector } from "react-redux";
+import { selectInvoices } from "@/store/slices/invoiceSlice";
+import { selectCustomers } from "@/store/slices/customerSlice";
+import { selectCurrentUser } from "@/store/slices/userSlice";
+import { selectLanguage } from "@/store/slices/settingsSlice";
 
 export default function DashboardPage() {
-  const { invoices, customers, payments, user, language, currency } =
-    useStore();
+  const invoices = useSelector(selectInvoices);
+  const customers = useSelector(selectCustomers);
+  // const payments = useSelector(selectPayments);
+  const user = useSelector(selectCurrentUser);
+  const language = useSelector(selectLanguage);
 
   // Calculate stats
   const totalInvoices = invoices.length;
@@ -53,18 +61,6 @@ export default function DashboardPage() {
 
   // Recent invoices (last 5)
   const recentInvoices = invoices.slice(0, 5);
-
-  const formatCurrency = (amount: number) => {
-    const symbol =
-      currency === "BDT"
-        ? "৳"
-        : currency === "USD"
-        ? "$"
-        : currency === "EUR"
-        ? "€"
-        : "£";
-    return `${symbol}${amount.toLocaleString()}`;
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -122,9 +118,7 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {formatCurrency(totalRevenue)}
-            </div>
+            <div className="text-2xl font-bold">৳{totalRevenue}</div>
             <p className="text-xs text-muted-foreground">
               {language === "en"
                 ? "+20.1% from last month"
@@ -255,9 +249,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
-                      <p className="font-medium">
-                        {formatCurrency(invoice.totalAmount)}
-                      </p>
+                      <p className="font-medium">৳{invoice.totalAmount}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         {invoice.date}
                       </p>
@@ -305,8 +297,6 @@ export default function DashboardPage() {
           </div>
         </CardContent>
       </Card>
-
-   
     </div>
   );
 }

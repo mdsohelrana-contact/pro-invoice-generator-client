@@ -1,5 +1,6 @@
 import { TPayment } from "@/types/payment.type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface PaymentState {
   payments: TPayment[];
@@ -30,8 +31,8 @@ const paymentSlice = createSlice({
 });
 
 // Selectors
-export const selectPayments = (state: { payment: PaymentState }) =>
-  state.payment.payments;
+export const selectPayments =(state: RootState) =>
+  state.payments.payments;
 
 export const { addPayment, updatePayment, deletePayment } =
   paymentSlice.actions;

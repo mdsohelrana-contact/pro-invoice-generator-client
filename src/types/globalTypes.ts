@@ -1,7 +1,7 @@
 // src/types/globalTypes.ts
 
 export type Language = 'en' | 'bn';
-export type Currency = 'BDT' | 'USD' | 'EUR' | 'GBP';
+export type Currency = 'BDT';
 
 export type InvoiceStatus = 'Draft' | 'Pending' | 'Paid' | 'Overdue';
 export type PaymentStatus = 'Completed' | 'Pending' | 'Failed';

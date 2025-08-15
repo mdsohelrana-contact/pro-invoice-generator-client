@@ -1,8 +1,7 @@
-import {
-  TNotification,
-  TNotificationSettings,
-} from "@/types/notification.type";
+// notificationSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TNotification, TNotificationSettings } from "@/types/notification.type";
+import { RootState } from "../store";
 
 interface NotificationState {
   list: TNotification[];
@@ -49,8 +48,9 @@ const notificationSlice = createSlice({
   },
 });
 
-// Selectors
-export const selectNotifications = (state: { notification: NotificationState }) => state.notification.list;
+// Selector
+export const selectNotifications = (state: RootState) => state.notifications.list;
+
 
 export const {
   addNotification,
@@ -60,4 +60,5 @@ export const {
   deleteAllNotifications,
   updateNotificationSettings,
 } = notificationSlice.actions;
+
 export default notificationSlice.reducer;

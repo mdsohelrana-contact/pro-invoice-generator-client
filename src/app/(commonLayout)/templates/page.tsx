@@ -14,6 +14,7 @@ import InvoiceGrid from "@/components/Module/Templates/InvoiceGrid";
 import InvoicePreviewDialog from "@/components/Module/Templates/InvoicePreviewDialog";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";
+import { selectCurrentUser } from "@/store/slices/userSlice";
 
 const templatesData = [
   {
@@ -90,8 +91,8 @@ const templatesData = [
 ];
 
 const TemplatesPage = () => {
-const language = useSelector(selectLanguage);
-  const { user } = useStore();
+  const language = useSelector(selectLanguage);
+  const user = useSelector(selectCurrentUser);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");

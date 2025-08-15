@@ -1,5 +1,6 @@
 import { TCustomer } from '@/types/customer.type';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface CustomerState {
   customers: TCustomer[];
@@ -28,7 +29,7 @@ const customerSlice = createSlice({
 });
 
 // Selector functions
-export const selectCustomers = (state: { customer: CustomerState }) => state.customer.customers;
+export const selectCustomers = (state: RootState) => state.customers.customers;
 
 export const { addCustomer, updateCustomer, deleteCustomer } = customerSlice.actions;
 export default customerSlice.reducer;

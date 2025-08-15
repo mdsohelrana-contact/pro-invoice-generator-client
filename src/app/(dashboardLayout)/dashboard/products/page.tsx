@@ -1,56 +1,28 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  Plus,
-  Search,
-  MoreHorizontal,
-  Edit,
-  Trash2,
-  Tag,
-  DollarSign,
-  Package,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useStore } from "@/lib/store";
-import { formatCurrency } from "@/lib/utils";
-import Image from "next/image";
-import ProductCard from "@/components/Module/Dashboard/Product/ProductCard";
+
 import ProductGrid from "../../../../components/Module/Dashboard/Product/ProductGrid";
 import SearchFilterBar from "@/components/Module/Shared/Components/SearchFilterBar";
-import EmptyState from "@/components/Module/Shared/Components/EmptyState";
+
 import { TProduct } from "@/types/product.type";
 import NewProductModal from "@/components/Module/Dashboard/Product/NewProductModal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
+import {
+  addProduct,
+  deleteProduct,
+  selectProducts,
+  updateProduct,
+} from "@/store/slices/productSlice";
 
 const ProductsPage = () => {
-  const { language, products, addProduct, updateProduct, deleteProduct } =
-    useStore();
+  const language = useSelector(selectLanguage);
+  const products = useSelector(selectProducts);
+  const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -102,7 +74,7 @@ const ProductsPage = () => {
   const listToFilter: TProduct[] =
     products.length > 0 ? products : dummyProducts;
 
-  const filteredProducts = listToFilter.filter((product:TProduct) => {
+  const filteredProducts = listToFilter.filter((product: TProduct) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -124,15 +96,20 @@ const ProductsPage = () => {
           : "আপনি কি এই পণ্যটি মুছে ফেলতে চান?"
       )
     ) {
-      deleteProduct(id);
+      dispatch(deleteProduct(id));
     }
   };
 
   const handleSubmit = (data: Omit<TProduct, "id" | "image">) => {
     if (editingProduct) {
-      updateProduct(editingProduct.id, data);
+      dispatch(updateProduct({ ...editingProduct, ...data }));
     } else {
-      addProduct(data);
+      const newProduct: TProduct = {
+        ...data,
+        id: Date.now().toString(),
+        image: "https://source.unsplash.com/random/300x300?product",
+      };
+      dispatch(addProduct(newProduct));
     }
     setEditingProduct(null);
     setIsModalOpen(false);
@@ -157,14 +134,14 @@ const ProductsPage = () => {
                 : "দ্রুত ইনভয়েস তৈরির জন্য আপনার পণ্য ও সেবা পরিচালনা করুন"}
             </p>
           </div>
-        <NewProductModal
-        isOpen={isModalOpen}
-        onOpenChange={setIsModalOpen}
-        onSubmit={handleSubmit}
-        productToEdit={editingProduct}
-        categories={categories}
-        language={language}
-      />
+          <NewProductModal
+            isOpen={isModalOpen}
+            onOpenChange={setIsModalOpen}
+            onSubmit={handleSubmit}
+            productToEdit={editingProduct}
+            categories={categories}
+            language={language}
+          />
         </div>
       </motion.div>
 
@@ -184,7 +161,7 @@ const ProductsPage = () => {
         language={language}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        setIsAddModalOpen={ setIsModalOpen}
+        setIsAddModalOpen={setIsModalOpen}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import { TRecurringInvoice } from "@/types/recurringInvoice.type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface RecurringInvoiceState {
   recurringInvoices: TRecurringInvoice[];
@@ -33,9 +34,7 @@ const recurringInvoiceSlice = createSlice({
 });
 
 // Selectors
-export const selectRecurringInvoices = (state: {
-  recurringInvoice: RecurringInvoiceState;
-}) => state.recurringInvoice.recurringInvoices;
+export const selectRecurringInvoices =(state: RootState)=> state.recurringInvoices.recurringInvoices;
 
 export const {
   addRecurringInvoice,

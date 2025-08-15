@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Card, CardContent } from "@/components/ui/card";
+import {  CardContent } from "@/components/ui/card";
 import SectionHeader from "../Shared/Components/SectionHeader";
 import PrimaryStyledCard from "../Shared/Components/PrimaryStyledCard";
 
 interface IntegrationItem {
   name: string;
-  logo: React.ReactNode; // ইমোজি বা আইকন হতে পারে
+  logo: React.ReactNode; 
   description: string;
 }
 

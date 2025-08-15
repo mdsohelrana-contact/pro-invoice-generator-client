@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import SectionHeader from "../Shared/Components/SectionHeader";
 import PrimaryStyledCard from "../Shared/Components/PrimaryStyledCard";

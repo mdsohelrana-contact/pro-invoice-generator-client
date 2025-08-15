@@ -1,14 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Bug,
-  Send,
-  FileText,
-  MessageSquare,
-  Info,
-  CheckCircle,
-} from "lucide-react";
+import { Bug, Send, Info, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,14 +20,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useStore } from "@/lib/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";
+import { addNotification } from "@/store/slices/notificationSlice";
+import { TNotification } from "@/types/notification.type";
+
 const ReportPage = () => {
   const language = useSelector(selectLanguage);
-  const {  addNotification } = useStore();
+  const dispatch = useDispatch();
+
   const [reportType, setReportType] = React.useState<
     "bug" | "feature" | "general"
   >("bug");
@@ -48,7 +45,7 @@ const ReportPage = () => {
     setLoading(true);
 
     if (!subject || !description) {
-      toast.success(
+      toast.error(
         language === "en"
           ? "Please fill in all required fields."
           : "অনুগ্রহ করে সম্পূর্ণ ফিল্ডগুলি পূরণ করুন।"
@@ -70,23 +67,21 @@ const ReportPage = () => {
       };
       console.log("Report submitted:", reportData);
 
-      addNotification({
+      // Dispatch notification to Redux
+      const newNotification: TNotification = {
         id: `notif_${Date.now()}`,
         message:
           language === "en"
-            ? `Your ${reportType} report "${subject}" has been submitted.`
-            : `আপনার ${reportType} রিপোর্ট "${subject}" জমা দেওয়া হয়েছে।`,
+            ? "Report submitted successfully!"
+            : "রিপোর্ট সফলভাবে জমা দেওয়া হয়েছে!",
         type: "success",
         category: "support",
         read: false,
         timestamp: new Date().toISOString(),
-      });
+      };
+      dispatch(addNotification(newNotification));
 
-      toast.success(
-        language === "en"
-          ? "Report submitted successfully!"
-          : "রিপোর্ট সফলভাবে জমা দেওয়া হয়েছে!"
-      );
+      toast.success(newNotification.message);
 
       // Reset form
       setReportType("bug");
@@ -95,15 +90,16 @@ const ReportPage = () => {
       setAttachLogs(false);
     } catch (error) {
       console.error("Report submission error:", error);
-      toast.success(
+      toast.error(
         language === "en"
-          ? "Report submitted successfully!"
-          : "রিপোর্ট সফলভাবে জমা দেওয়া হয়েছে!"
+          ? "Failed to submit report."
+          : "রিপোর্ট জমা দিতে ব্যর্থ হয়েছে।"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="p-4 md:p-6 space-y-6">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white text-center">
@@ -130,6 +126,7 @@ const ReportPage = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="grid gap-6">
+            {/* Report Type */}
             <div className="grid gap-2">
               <Label htmlFor="report-type">
                 {language === "en" ? "Report Type" : "রিপোর্টের ধরন"}
@@ -173,6 +170,8 @@ const ReportPage = () => {
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Subject */}
             <div className="grid gap-2">
               <Label htmlFor="subject">
                 {language === "en" ? "Subject" : "বিষয়"}
@@ -193,6 +192,8 @@ const ReportPage = () => {
                 required
               />
             </div>
+
+            {/* Description */}
             <div className="grid gap-2">
               <Label htmlFor="description">
                 {language === "en" ? "Description" : "বিবরণ"}
@@ -210,6 +211,8 @@ const ReportPage = () => {
                 required
               />
             </div>
+
+            {/* Attach Logs */}
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="attach-logs"
@@ -222,6 +225,8 @@ const ReportPage = () => {
                   : "সিস্টেম লগ সংযুক্ত করুন (ডিবাগিংয়ে সাহায্য করে)"}
               </Label>
             </div>
+
+            {/* Submit Button */}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
                 language === "en" ? (

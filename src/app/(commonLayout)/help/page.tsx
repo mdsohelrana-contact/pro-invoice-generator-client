@@ -30,11 +30,7 @@ import AnimatedDoubleCTASection from "@/components/Module/Shared/Components/Anim
 import { useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
+
 const HelpPage = () => {
 const language = useSelector(selectLanguage);
   const [searchTerm, setSearchTerm] = useState("");

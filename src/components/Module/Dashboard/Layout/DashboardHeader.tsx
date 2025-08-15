@@ -1,18 +1,12 @@
 "use client";
-
-import { useState } from "react";
 import {
-  Bell,
-  Search,
   User,
   Settings,
   LogOut,
   Moon,
   Sun,
-  Globe,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,8 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { useStore } from "@/lib/store";
 import { useTheme } from "next-themes";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
@@ -35,11 +27,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "@/store/slices/settingsSlice";
+import { selectCurrentUser } from "@/store/slices/userSlice";
+import LanguageButton from "../../Shared/Buttons/LanguageButton";
 
 export function Header() {
-  const { language, setLanguage, user } = useStore();
+  const language = useSelector(selectLanguage);
+  const user = useSelector(selectCurrentUser);
   const { setTheme } = useTheme();
-  const [searchQuery, setSearchQuery] = useState("");
 
   // Fix: Access notifications.list instead of notifications directly
   //   const unreadNotifications = notifications.list ? notifications.list.filter((n) => !n.read).length : 0
@@ -78,14 +74,7 @@ export function Header() {
         {/* Right side actions */}
         <div className="flex items-center space-x-4">
           {/* Language Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setLanguage(language === "en" ? "bn" : "en")}
-          >
-            <Globe className="w-4 h-4 mr-2" />
-            {language === "en" ? "বাং" : "EN"}
-          </Button>
+          <LanguageButton />
 
           {/* Theme Toggle */}
           <DropdownMenu>

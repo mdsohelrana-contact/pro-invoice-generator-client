@@ -4,6 +4,7 @@ import { TInvoice } from '@/types/invoice.type';
 
 // src/features/invoice/invoiceSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface InvoiceState {
   invoices: TInvoice[];
@@ -30,7 +31,8 @@ const invoiceSlice = createSlice({
 });
 
 // Selectors
-export const selectInvoices = (state: { invoice: InvoiceState }) => state.invoice.invoices;
+export const selectInvoices = (state: RootState) => state.invoices.invoices;
+
 
 export const { addInvoice, updateInvoice, deleteInvoice } = invoiceSlice.actions;
 export default invoiceSlice.reducer;
