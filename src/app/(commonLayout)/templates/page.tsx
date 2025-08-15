@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { FileText, Crown } from "lucide-react";
 
-import { useStore } from "@/lib/store";
 import Link from "next/link";
 import { toast } from "sonner";
 import SectionHeader from "@/components/Module/Shared/Components/SectionHeader";

@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";

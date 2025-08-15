@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-
-import { useStore } from "@/lib/store";
-
 import ProductGrid from "../../../../components/Module/Dashboard/Product/ProductGrid";
 import SearchFilterBar from "@/components/Module/Shared/Components/SearchFilterBar";
 

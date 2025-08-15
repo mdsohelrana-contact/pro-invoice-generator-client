@@ -8,10 +8,7 @@ import {
 
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import { LanguageProvider } from "../components/context/LanguageContext";
 import Script from "next/script";
-import store from "@/store/store";
-import { Provider } from "react-redux";
 import ProvidersWrapper from "@/Provider/ProvidersWrapper";
 
 // Load English + Bangla fonts

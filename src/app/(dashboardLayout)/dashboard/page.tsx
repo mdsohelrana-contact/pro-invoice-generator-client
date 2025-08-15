@@ -13,8 +13,6 @@ import { Progress } from "@/components/ui/progress";
 import {
   FileText,
   Users,
-  CreditCard,
-  TrendingUp,
   Plus,
   Eye,
   Edit,
@@ -23,7 +21,6 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
-import { useStore } from "@/lib/store";
 import {
   DropdownMenu,
   DropdownMenuContent,
