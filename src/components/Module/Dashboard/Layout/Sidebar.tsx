@@ -117,13 +117,13 @@ const data = {
     },
   ],
   navSecondary: [
-    { title: "Settings", url: "/settings", icon: Settings },
-    { title: "Help & Support", url: "/help", icon: HelpCircle },
-    { title: "Report Problem", url: "/support/report", icon: AlertTriangle },
+    { title: "Settings", url: "/dashboard/settings", icon: Settings },
+    { title: "Help & Support", url: "/dashboard/support", icon: HelpCircle },
+    { title: "Report Problem", url: "/dashboard/report", icon: AlertTriangle },
   ],
   quickActions: [
-    { title: "New Invoice", url: "/invoices/create", icon: Plus },
-    { title: "Add Customer", url: "/customers/create", icon: Users },
+    { title: "New Invoice", url: "/dashboard/invoice/create", icon: Plus },
+    { title: "Add Customer", url: "/dashboard/customers/create", icon: Users },
   ],
 };
 

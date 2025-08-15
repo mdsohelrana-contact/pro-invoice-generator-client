@@ -63,15 +63,15 @@ const templatesData = [
   },
   {
     id: 5,
-    name: "Freelancer Pro",
+    name: "freelancer Pro",
     description: "Perfect template for freelancers and consultants",
     category: "freelancer",
     premium: true,
     rating: 4.8,
     downloads: 780,
     preview:
-      "/placeholder.svg?height=400&width=300&text=Freelancer+Pro+Template",
-    features: ["Freelancer Focused", "Time Tracking", "Project Details"],
+      "/placeholder.svg?height=400&width=300&text=freelancer+Pro+Template",
+    features: ["freelancer Focused", "Time Tracking", "Project Details"],
   },
   {
     id: 6,
@@ -104,7 +104,7 @@ const TemplatesPage = () => {
     { value: "minimal", label: language === "en" ? "Minimal" : "মিনিমাল" },
     {
       value: "freelancer",
-      label: language === "en" ? "Freelancer" : "ফ্রিল্যান্সার",
+      label: language === "en" ? "freelancer" : "ফ্রিল্যান্সার",
     },
     { value: "classic", label: language === "en" ? "Classic" : "ক্লাসিক" },
   ];
@@ -119,7 +119,7 @@ const TemplatesPage = () => {
   });
 
   const handleUseTemplate = (template: any) => {
-    if (template.premium && user?.plan === "Free") {
+    if (template.premium && user?.plan === "free") {
       toast.success("Upgrade your plan to use this template");
       return;
     }
@@ -129,7 +129,7 @@ const TemplatesPage = () => {
   };
 
   const handleDownloadTemplate = (template: any) => {
-    if (template.premium && user?.plan === "Free") {
+    if (template.premium && user?.plan === "free") {
       toast.success("Upgrade your plan to use this template");
       return;
     }
@@ -150,7 +150,7 @@ const TemplatesPage = () => {
         />
 
         <div className="flex items-center justify-center mb-4">
-          {user?.plan === "Free" && (
+          {user?.plan === "free" && (
             <Link href="/pricing">
               <PrimaryButton className="" size="lg">
                 <Crown className="w-4 h-4 mr-2" />
