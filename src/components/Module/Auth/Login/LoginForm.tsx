@@ -280,7 +280,7 @@ const LoginForm = () => {
                     <p className="text-sm text-gray-600">
                       {currentContent.noAccount}{" "}
                       <Link
-                        href="/forgot-password"
+                        href="/sign-up"
                         className="text-sm primary-color hover:primary-hover"
                         aria-label={currentContent.signUp}
                       >
