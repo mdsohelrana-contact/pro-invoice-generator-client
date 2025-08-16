@@ -7,7 +7,17 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  currentUser: null,
+  currentUser: {
+    id: "",
+    name: "",
+    email: "",
+    plan: "free",
+    invoicesUsed: 0,
+    maxInvoices: 0,
+    phone: "",
+    address: "",
+    avatar: "",
+  },
 };
 
 const userSlice = createSlice({

@@ -21,11 +21,14 @@ import productReducer from "./slices/productSlice";
 import paymentReducer from "./slices/paymentSlice";
 import recurringInvoiceReducer from "./slices/recurringInvoiceSlice";
 import notificationReducer from "./slices/notificationSlice";
+import analyticsReducer from "./slices/analyticsSlice";
+
 
 // Combine all reducers
 const rootReducer = combineReducers({
   user: userReducer, // persist this
   settings: settingsReducer, // persist this (language & theme)
+  analytics: analyticsReducer, 
   company: companyReducer,
   invoices: invoiceReducer,
   customers: customerReducer,

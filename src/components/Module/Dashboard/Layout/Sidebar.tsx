@@ -18,6 +18,7 @@ import {
   DollarSign,
   TrendingUp,
   Clock,
+  Crown,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -49,6 +50,7 @@ import { cn } from "@/lib/utils";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";
 import { selectNotifications } from "@/store/slices/notificationSlice";
+import { selectCurrentUser } from "@/store/slices/userSlice";
 
 // Main navigation items
 const data = {
@@ -73,30 +75,16 @@ const data = {
     { title: "Products", url: "/dashboard/products", icon: Package },
     {
       title: "Payments",
-      url: "/payments",
+      url: "/dashboard/payments",
       icon: CreditCard,
       badge: "5",
-      items: [
-        { title: "All Payments", url: "/payments", icon: CreditCard },
-        { title: "Pending", url: "/payments/pending", icon: Clock, badge: "5" },
-        {
-          title: "Overdue",
-          url: "/payments/overdue",
-          icon: AlertTriangle,
-          badge: "2",
-        },
-      ],
     },
-    { title: "Recurring", url: "/recurring", icon: Repeat },
+    { title: "Recurring", url: "/dashboard/recurring", icon: Repeat, premium: true },
     {
       title: "Analytics",
-      url: "/analytics",
+      url: "/dashboard/analytics",
       icon: BarChart3,
-      items: [
-        { title: "Overview", url: "/analytics", icon: TrendingUp },
-        { title: "Revenue", url: "/analytics/revenue", icon: DollarSign },
-        { title: "Reports", url: "/analytics/reports", icon: BarChart3 },
-      ],
+      premium: true,
     },
   ],
   navSecondary: [
@@ -106,16 +94,16 @@ const data = {
   ],
   quickActions: [
     { title: "New Invoice", url: "/dashboard/invoice/create", icon: Plus },
-    { title: "Add Customer", url: "/dashboard/customers/create", icon: Users },
+    { title: "Add Product", url: "/dashboard/product/create", icon: Package },
+    { title: "Add Customer", url: "/dashboard/customer/create", icon: Users },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    // const user = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
   const language = useSelector(selectLanguage);
   const pathname = usePathname();
- const notifications = useSelector(selectNotifications);
-
+  const notifications = useSelector(selectNotifications);
 
   const unreadCount = notifications?.filter((n) => !n.read).length || 0;
 
@@ -137,12 +125,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-semibold text-sidebar-foreground">
                     InvoicePro
                   </span>
-               
-                    <Badge className="bg-orange-100 my-1 text-orange-800">
-                      {language === "en" ? "Free Plan" : "ফ্রি প্ল্যান"} - 3/5
-                      invoices used
-                    </Badge>
-                  
+
+                  <Badge className="bg-orange-100 my-1 text-orange-800">
+                    {language === "en" ? "Free Plan" : "ফ্রি প্ল্যান"} - 3/5
+                    invoices used
+                  </Badge>
                 </div>
                 {unreadCount > 0 && (
                   <Badge
@@ -211,6 +198,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <div className="flex w-full items-center text-base">
                             <item.icon className="h-5 w-5" />
                             <span className="flex-1 ml-2">{item.title}</span>
+
+                            {item.premium && user?.plan === "premium" && (
+                              <Crown className="w-3 h-3 text-yellow-500" />
+                            )}
+
                             {item.badge && (
                               <Badge
                                 variant="secondary"

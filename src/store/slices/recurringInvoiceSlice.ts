@@ -19,12 +19,18 @@ const recurringInvoiceSlice = createSlice({
     },
     updateRecurringInvoice: (
       state,
-      action: PayloadAction<TRecurringInvoice>
+      action: PayloadAction<{ id: string; changes: Partial<TRecurringInvoice> }>
     ) => {
-      state.recurringInvoices = state.recurringInvoices.map((rec) =>
-        rec.id === action.payload.id ? action.payload : rec
-      );
+      const { id, changes } = action.payload;
+      const index = state.recurringInvoices.findIndex((rec) => rec.id === id);
+      if (index !== -1) {
+        state.recurringInvoices[index] = {
+          ...state.recurringInvoices[index],
+          ...changes,
+        };
+      }
     },
+
     deleteRecurringInvoice: (state, action: PayloadAction<string>) => {
       state.recurringInvoices = state.recurringInvoices.filter(
         (rec) => rec.id !== action.payload
@@ -34,7 +40,8 @@ const recurringInvoiceSlice = createSlice({
 });
 
 // Selectors
-export const selectRecurringInvoices =(state: RootState)=> state.recurringInvoices.recurringInvoices;
+export const selectRecurringInvoices = (state: RootState) =>
+  state.recurringInvoices.recurringInvoices;
 
 export const {
   addRecurringInvoice,
