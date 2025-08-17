@@ -75,19 +75,6 @@ const sidebarItems = [
     href: "/templates",
     icon: FileText,
   },
-  {
-    title: "Notifications",
-    titleBn: "বিজ্ঞপ্তি",
-    href: "/notifications",
-    icon: Bell,
-    badge: "3",
-  },
-  {
-    title: "Settings",
-    titleBn: "সেটিংস",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
 ];
 
 const supportItems = [
@@ -322,7 +309,7 @@ export function AppSidebar() {
       <Button
         variant="ghost"
         size="sm"
-        className="fixed top-4 left-4 z-30 md:hidden"
+        className="fixed top-4 left-4 z-30 md:hidden cursor-pointer"
         onClick={() => setIsMobileOpen(true)}
       >
         <Menu className="w-5 h-5" />

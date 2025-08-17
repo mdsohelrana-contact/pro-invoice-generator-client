@@ -5,6 +5,7 @@ export type TNotification = {
   category: "invoice" | "payment" | "customer" | "system" | "support";
   read: boolean;
   timestamp: string;
+  url?: string;
 };
 
 export type TNotificationSettings = {

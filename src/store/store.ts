@@ -22,13 +22,15 @@ import paymentReducer from "./slices/paymentSlice";
 import recurringInvoiceReducer from "./slices/recurringInvoiceSlice";
 import notificationReducer from "./slices/notificationSlice";
 import analyticsReducer from "./slices/analyticsSlice";
-
+import searchReducer from "./slices/searchSlice";
 
 // Combine all reducers
 const rootReducer = combineReducers({
   user: userReducer, // persist this
-  settings: settingsReducer, // persist this (language & theme)
-  analytics: analyticsReducer, 
+  settings: settingsReducer,
+  search: searchReducer,
+
+  analytics: analyticsReducer,
   company: companyReducer,
   invoices: invoiceReducer,
   customers: customerReducer,

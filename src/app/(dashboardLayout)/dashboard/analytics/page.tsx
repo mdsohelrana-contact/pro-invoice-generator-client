@@ -1,5 +1,7 @@
 "use client";
 
+import { Suspense } from 'react';
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -115,7 +117,8 @@ const AnalyticsPage = () => {
 
 
   return (
-    <div className="p-6">
+   <Suspense fallback={<div>Loading analytics...</div>}>
+     <div className="p-6">
       {/* Header */}
       <motion.div
         className="mb-8"
@@ -475,6 +478,7 @@ const AnalyticsPage = () => {
         </Card>
       </motion.div>
     </div>
+   </Suspense>
   );
 };
 
