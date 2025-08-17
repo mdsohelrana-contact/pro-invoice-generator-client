@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 
 import SectionHeader from "../Shared/Components/SectionHeader";
 import type { LucideIcon } from "lucide-react";
-import CountUp from "react-countup";
 
 interface StatItem {
   number: string | number;
@@ -30,12 +29,25 @@ const StatsSection: React.FC<StatsProps> = ({ t }) => {
     >
       <div className="container mx-auto">
         {/* Section Header */}
-        <SectionHeader
+        {/* <SectionHeader
           title={t.stats.title}
           subTitle={t.stats.subtitle}
+          titleClassName="text-white"
           subTitleClassName="text-xl opacity-90 text-white"
           className="mb-12"
-        />
+        /> */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 ">
+            {t.stats.title}
+          </h1>
+
+          <p className="text-xl text-white">{t.stats.subtitle}</p>
+        </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {t.stats.items.map((stat: StatItem, index: number) => (
@@ -63,7 +75,7 @@ const StatsSection: React.FC<StatsProps> = ({ t }) => {
                 id={`stat-label-${index}`}
                 className="text-3xl md:text-4xl font-bold mb-2"
               >
-               {stat.number}
+                {stat.number}
               </h3>
               <p className="text-lg opacity-90">{stat.label}</p>
             </motion.article>

@@ -137,7 +137,7 @@ export function AppSidebar() {
           sidebarCollapsed ? "justify-center" : "justify-between"
         )}
       >
-        <Link href="/dashboard" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
             <FileText className="w-5 h-5 text-white" />
           </div>

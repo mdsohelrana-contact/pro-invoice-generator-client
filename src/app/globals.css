@@ -38,6 +38,13 @@ body {
   @apply text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent;
 }
 
+/* Primary text gradient */
+.primary-text-gradient {
+  @apply bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 bg-clip-text text-transparent;
+}
+
+
+
 .primary-color {
   @apply text-[#007bff];
 }

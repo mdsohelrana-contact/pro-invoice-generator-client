@@ -33,7 +33,7 @@ const CTASection = ({
         {title && (
           <h2
             id="cta-section-title"
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4 primary-text-gradient"
           >
             {title}
           </h2>

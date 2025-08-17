@@ -29,7 +29,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       {title && (
         <h1
           className={clsx(
-            "text-3xl md:text-4xl font-bold mb-4",
+            "text-3xl md:text-4xl font-bold mb-4 primary-text-gradient",
             titleClassName
           )}
         >

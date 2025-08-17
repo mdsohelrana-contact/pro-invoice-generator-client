@@ -27,7 +27,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t }) => {
           🎉 New: WhatsApp Integration Available
         </Badge>
         <h1
-          className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 bg-clip-text text-transparent"
+          className="text-4xl md:text-6xl font-bold mb-6 primary-text-gradient"
           tabIndex={-1}
         >
           {t.hero.title}
