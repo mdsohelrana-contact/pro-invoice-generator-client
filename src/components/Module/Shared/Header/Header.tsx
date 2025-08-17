@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import LanguageButton from "../Buttons/LanguageButton";
 import { navLinks } from "../Navlinks/navLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import Logo from "../Logo/Logo";
 
 const headerVariants = {
   hidden: { opacity: 0, y: -50 },
@@ -59,12 +60,7 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         {/* Left Section: Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
-            <FileText className="w-5 h-5 text-white" />
-          </div>
-          <span className="gradient-text">InvoicePro BD</span>
-        </Link>
+        <Logo />
 
         {/* Center Section: Desktop Navigation */}
         <nav
@@ -112,13 +108,13 @@ export default function Header() {
           </Link>
 
           {/* Get Started Button */}
-          <Button
-            className="bg-gradient-to-r from-[#007bff] to-[#28a745] text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer"
-            size="sm"
+
+          <PrimaryButton
+            className="hidden md:flex"
             aria-label="Get Started with InvoicePro BD"
           >
             <Link href="/dashboard">Get Started</Link>
-          </Button>
+          </PrimaryButton>
 
           {/* Mobile Menu Trigger */}
           <Sheet>

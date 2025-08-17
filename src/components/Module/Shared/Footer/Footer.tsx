@@ -1,6 +1,7 @@
 import { FileText } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import Logo from "../Logo/Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,15 +12,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div
-                className="w-8 h-8 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <FileText className="w-5 h-5 text-white" aria-hidden="true" />
-              </div>
-              <span className="text-xl font-bold">InvoicePro BD</span>
-            </div>
+            <Logo />
             <p className="text-gray-400">
               Professional invoice generator for Bangladeshi businesses.
             </p>
