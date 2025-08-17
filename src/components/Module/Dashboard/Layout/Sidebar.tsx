@@ -1,288 +1,332 @@
 "use client";
 
-import type * as React from "react";
-import {
-  BarChart3,
-  CreditCard,
-  FileText,
-  Home,
-  Package,
-  Repeat,
-  Settings,
-  Users,
-  HelpCircle,
-  AlertTriangle,
-  ChevronDown,
-  Plus,
-  Building2,
-  DollarSign,
-  TrendingUp,
-  Clock,
-  Crown,
-} from "lucide-react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarRail,
-  SidebarSeparator,
-} from "@/components/ui/sidebar";
-
+  LayoutDashboard,
+  FileText,
+  Users,
+  Package,
+  CreditCard,
+  BarChart3,
+  RefreshCw,
+  Settings,
+  Bell,
+  Menu,
+  X,
+  Crown,
+  HelpCircle,
+  MessageSquare,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { useSelector } from "react-redux";
 import { selectLanguage } from "@/store/slices/settingsSlice";
-import { selectNotifications } from "@/store/slices/notificationSlice";
 import { selectCurrentUser } from "@/store/slices/userSlice";
 
-// Main navigation items
-const data = {
-  navMain: [
-    { title: "Dashboard", url: "/dashboard", icon: Home, isActive: true },
-    {
-      title: "Invoices",
-      url: "/invoice",
-      icon: FileText,
-      badge: "12",
-      items: [
-        { title: "All Invoices", url: "/dashboard/invoice", icon: FileText },
-        { title: "Templates", url: "/templates", icon: Building2 },
-        {
-          title: "Drafts",
-          url: "/invoices/drafts",
-          icon: FileText,
-          badge: "3",
-        },
-      ],
-    },
-    { title: "Products", url: "/dashboard/products", icon: Package },
-    {
-      title: "Payments",
-      url: "/dashboard/payments",
-      icon: CreditCard,
-      badge: "5",
-    },
-    { title: "Recurring", url: "/dashboard/recurring", icon: Repeat, premium: true },
-    {
-      title: "Analytics",
-      url: "/dashboard/analytics",
-      icon: BarChart3,
-      premium: true,
-    },
-  ],
-  navSecondary: [
-    { title: "Settings", url: "/dashboard/settings", icon: Settings },
-    { title: "Help & Support", url: "/dashboard/support", icon: HelpCircle },
-    { title: "Report Problem", url: "/dashboard/report", icon: AlertTriangle },
-  ],
-  quickActions: [
-    { title: "New Invoice", url: "/dashboard/invoice/create", icon: Plus },
-    { title: "Add Product", url: "/dashboard/product/create", icon: Package },
-    { title: "Add Customer", url: "/dashboard/customer/create", icon: Users },
-  ],
-};
+const sidebarItems = [
+  {
+    title: "Dashboard",
+    titleBn: "ড্যাশবোর্ড",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Invoices",
+    titleBn: "ইনভয়েস",
+    href: "/dashboard/invoice",
+    icon: FileText,
+    badge: "new",
+  },
+  {
+    title: "Customers",
+    titleBn: "গ্রাহক",
+    href: "/dashboard/customers",
+    icon: Users,
+  },
+  {
+    title: "Products",
+    titleBn: "পণ্য",
+    href: "/dashboard/products",
+    icon: Package,
+  },
+  {
+    title: "Analytics",
+    titleBn: "বিশ্লেষণ",
+    href: "/dashboard/analytics",
+    icon: BarChart3,
+    premium: true,
+  },
+  {
+    title: "Recurring",
+    titleBn: "পুনরাবৃত্ত",
+    href: "/dashboard/recurring",
+    icon: RefreshCw,
+    premium: true,
+  },
+  {
+    title: "Templates",
+    titleBn: "টেমপ্লেট",
+    href: "/templates",
+    icon: FileText,
+  },
+  {
+    title: "Notifications",
+    titleBn: "বিজ্ঞপ্তি",
+    href: "/notifications",
+    icon: Bell,
+    badge: "3",
+  },
+  {
+    title: "Settings",
+    titleBn: "সেটিংস",
+    href: "/dashboard/settings",
+    icon: Settings,
+  },
+];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const user = useSelector(selectCurrentUser);
-  const language = useSelector(selectLanguage);
+const supportItems = [
+  {
+    title: "Help Center",
+    titleBn: "সাহায্য কেন্দ্র",
+    href: "/dashboard/support",
+    icon: HelpCircle,
+  },
+  {
+    title: "Problem Report",
+    titleBn: "সমস্যা রিপোর্ট",
+    href: "/dashboard/report",
+    icon: MessageSquare,
+  },
+];
+
+export function AppSidebar() {
   const pathname = usePathname();
-  const notifications = useSelector(selectNotifications);
+  const language = useSelector(selectLanguage);
+  const user = useSelector(selectCurrentUser);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const unreadCount = notifications?.filter((n) => !n.read).length || 0;
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobileOpen(true);
+    }
+
+    const handleResize = () => {
+      // if user resize to desktop, always close mobile sidebar
+      if (window.innerWidth >= 768) {
+        setIsMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full">
+      {/* Logo */}
+      <div
+        className={cn(
+          "flex items-center px-4 py-6 border-b border-gray-200 dark:border-gray-700",
+          sidebarCollapsed ? "justify-center" : "justify-between"
+        )}
+      >
+        <Link href="/dashboard" className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
+            <FileText className="w-5 h-5 text-white" />
+          </div>
+          {!sidebarCollapsed && (
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+              InvoicePro BD
+            </span>
+          )}
+        </Link>
+
+        {!sidebarCollapsed && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSidebarCollapsed(true)}
+            className="hidden md:flex"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+        )}
+      </div>
+
+      {/* User Info */}
+   
+      {/* Navigation */}
+      <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+        {sidebarItems.map((item) => {
+          const isActive = pathname === item.href;
+          const Icon = item.icon;
+          const title = language === "en" ? item.title : item.titleBn;
+
+          return (
+            <Link key={item.href} href={item.href}>
+              <div
+                className={cn(
+                  "flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 group relative",
+                  isActive
+                    ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-md"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700",
+                  sidebarCollapsed ? "justify-center" : "justify-start"
+                )}
+              >
+                <Icon
+                  className={cn(
+                    "w-5 h-5 flex-shrink-0",
+                    sidebarCollapsed ? "" : "mr-3"
+                  )}
+                />
+
+                {!sidebarCollapsed && (
+                  <>
+                    <span className="flex-1">{title}</span>
+                    <div className="flex items-center space-x-1">
+                      {item.premium && user?.plan !== "premium" && (
+                        <Crown className="w-3 h-3 text-yellow-500" />
+                      )}
+                      {item.badge && (
+                        <Badge
+                          variant={
+                            item.badge === "new" ? "default" : "secondary"
+                          }
+                          className="text-xs"
+                        >
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {sidebarCollapsed && (
+                  <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                    {title}
+                  </div>
+                )}
+              </div>
+            </Link>
+          );
+        })}
+
+        {/* Support Section */}
+        <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+          {!sidebarCollapsed && (
+            <p className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+              {language === "en" ? "Support" : "সাহায্য"}
+            </p>
+          )}
+
+          {supportItems.map((item) => {
+            const isActive = pathname === item.href;
+            const Icon = item.icon;
+            const title = language === "en" ? item.title : item.titleBn;
+
+            return (
+              <Link key={item.href} href={item.href}>
+                <div
+                  className={cn(
+                    "flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 group relative",
+                    isActive
+                      ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-md"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700",
+                    sidebarCollapsed ? "justify-center" : "justify-start"
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "w-5 h-5 flex-shrink-0",
+                      sidebarCollapsed ? "" : "mr-3"
+                    )}
+                  />
+
+                  {!sidebarCollapsed && <span className="flex-1">{title}</span>}
+
+                  {sidebarCollapsed && (
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                      {title}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Collapse Toggle for Desktop */}
+      {sidebarCollapsed && (
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 hidden md:block">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSidebarCollapsed(false)}
+            className="w-full justify-center"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 
   return (
-    <Sidebar collapsible="icon" className="border-r" {...props}>
-      <SidebarHeader className="border-b border-sidebar-border">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              asChild
-              className="hover:bg-sidebar-accent"
+    <>
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {isMobileOpen && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileOpen(false)}
+            />
+            <motion.div
+              className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-800 z-50 md:hidden shadow-xl"
+              initial={{ x: -256 }}
+              animate={{ x: 0 }}
+              exit={{ x: -256 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              <Link href="/dashboard">
-                <div className="flex aspect-square h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-sm">
-                  <FileText className="h-5 w-5" />
-                </div>
-                <div className="grid flex-1 text-left text-base leading-tight">
-                  <span className="truncate font-semibold text-sidebar-foreground">
-                    InvoicePro
-                  </span>
+            
+              <div className="h-[calc(100%-73px)]">
+                <SidebarContent />
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
-                  <Badge className="bg-orange-100 my-1 text-orange-800">
-                    {language === "en" ? "Free Plan" : "ফ্রি প্ল্যান"} - 3/5
-                    invoices used
-                  </Badge>
-                </div>
-                {unreadCount > 0 && (
-                  <Badge
-                    variant="destructive"
-                    className="ml-auto h-6 w-6 p-0 text-sm"
-                  >
-                    {unreadCount}
-                  </Badge>
-                )}
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+      {/* Desktop Sidebar */}
+      <div
+        className={cn(
+          "hidden md:flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300",
+          sidebarCollapsed ? "w-16" : "w-64"
+        )}
+      >
+        <SidebarContent />
+      </div>
 
-      <SidebarContent className="gap-0">
-        {/* Quick Actions */}
-        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel className="text-sm font-medium text-sidebar-foreground/70">
-            {language === "en" ? "Quick Actions" : "দ্রুত কর্ম"}
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {data.quickActions.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="sm" className="h-9">
-                    <Link href={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      <span className="text-sm">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarSeparator className="group-data-[collapsible=icon]:hidden" />
-
-        {/* Main Navigation */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-sm font-medium text-sidebar-foreground/70">
-            {language === "en" ? "Main Menu" : "প্রধান মেনু"}
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {data.navMain.map((item) => (
-                <Collapsible
-                  key={item.title}
-                  asChild
-                  defaultOpen={item.isActive}
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton
-                        tooltip={item.title}
-                        isActive={pathname === item.url}
-                        className={cn(
-                          "w-full justify-start",
-                          pathname === item.url &&
-                            "bg-sidebar-accent text-sidebar-accent-foreground"
-                        )}
-                        asChild={!item.items}
-                      >
-                        {item.items ? (
-                          <div className="flex w-full items-center text-base">
-                            <item.icon className="h-5 w-5" />
-                            <span className="flex-1 ml-2">{item.title}</span>
-
-                            {item.premium && user?.plan === "premium" && (
-                              <Crown className="w-3 h-3 text-yellow-500" />
-                            )}
-
-                            {item.badge && (
-                              <Badge
-                                variant="secondary"
-                                className="ml-auto h-6 px-2 text-sm"
-                              >
-                                {item.badge}
-                              </Badge>
-                            )}
-                            <ChevronDown className="ml-1 h-5 w-5 transition-transform duration-200" />
-                          </div>
-                        ) : (
-                          <Link
-                            href={item.url}
-                            className="flex w-full items-center text-base"
-                          >
-                            <item.icon className="h-5 w-5" />
-                            <span className="flex-1 ml-2">{item.title}</span>
-                          </Link>
-                        )}
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    {item.items && (
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {item.items.map((subItem) => (
-                            <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton
-                                asChild
-                                isActive={pathname === subItem.url}
-                              >
-                                <Link
-                                  href={subItem.url}
-                                  className="flex items-center text-sm"
-                                >
-                                  {subItem.icon && (
-                                    <subItem.icon className="h-4 w-4 mr-2" />
-                                  )}
-                                  <span>{subItem.title}</span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    )}
-                  </SidebarMenuItem>
-                </Collapsible>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarSeparator />
-
-        {/* Secondary Navigation */}
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {data.navSecondary.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.url}
-                    tooltip={item.title}
-                  >
-                    <Link
-                      href={item.url}
-                      className="text-base flex items-center"
-                    >
-                      <item.icon className="h-5 w-5" />
-                      <span className="ml-2">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
+      {/* Mobile Menu Button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        className="fixed top-4 left-4 z-30 md:hidden"
+        onClick={() => setIsMobileOpen(true)}
+      >
+        <Menu className="w-5 h-5" />
+      </Button>
+    </>
   );
 }
